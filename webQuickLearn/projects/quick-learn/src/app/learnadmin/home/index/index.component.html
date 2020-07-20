@@ -1,0 +1,117 @@
+<div class="flex-row mx-start sx-stretch" style="width: 100%;height: 100%;">
+    <div class="flex-column mx-start sx-stretch " [ngStyle]="{'flex': style}" style="background-color: 	#FCFCFC;">
+      <!-- 菜单列表 -->
+      <div class="flex-column mx-start sx-stretch"
+        style="flex:1 1 auto;min-width: 100px;max-width: 100%;overflow: auto;margin: 5px 5px;">
+        <div class="flex-txt-center" style="flex:0 0 60px;border-radius: 4px;
+                  font-family:Arial,Helvetica,sans-serif;
+                  font-size:1.5em;
+                  vertical-align:middle;
+                  font-weight:normal;
+                  color: rgba(00, 00, 00, 0.45);
+  
+                  background-image: url('../../../assets/imgs/users/timg.jpg');
+                  background-size:100% 100%;
+                  background-repeat:no-repeat;">
+          QuickLearn
+        </div>
+  
+  
+        <!-- 菜单主体 -->
+        <div nz-menu nzMode="inline" style="flex:0 0 auto;border-radius: 4px;">
+  
+          <div nz-menu-item (click)="routerClick('HOME')"><i nz-icon nzType="home" nzTheme="outline"></i>主页</div>
+          <div nz-submenu nzTitle="用户管理" nzIcon="user">
+            <div nz-menu-item (click)="routerClick('USER_LIST')">用户列表</div>
+            <div nz-menu-item (click)="routerClick('NO')">待开发.....</div>
+          </div>
+          <div nz-submenu nzTitle="博客管理" nzIcon="form">
+            <div nz-menu-item (click)="routerClick('BOOK_LIST')">博客列表</div>
+            <div nz-menu-item (click)="routerClick('BOOK_AUDIT_LIST')">待审核</div>
+          </div>
+          <div nz-submenu nzTitle="模板管理" nzIcon="edit">
+            <div nz-menu-item (click)="routerClick('TEMPLATE_LIST')">模板列表</div>
+            <div nz-menu-item (click)="routerClick('NO')">待开发...</div>
+          </div>
+          <div nz-submenu nzTitle="广告管理" nzIcon="notification">
+            <div nz-menu-item (click)="routerClick('AD_LIST')">广告列表</div>
+            <div nz-menu-item (click)="routerClick('AD_AUDIT')">广告审核</div>
+          </div>
+          <div nz-submenu nzTitle="日志管理" nzIcon="file">
+            <div nz-menu-item (click)="routerClick('LOG_LOGIN_LIST')">登录日志</div>
+            <div nz-menu-item (click)="routerClick('LOG_OPERATE_LIST')">操作日志</div>
+          </div>
+          <div nz-submenu nzTitle="权限管理" nzIcon="key">
+            <div nz-menu-item (click)="routerClick('ADMIN_AUTH')">管理员权限</div>
+            <div nz-menu-item (click)="routerClick('ADMIN_MENU')">菜单权限</div>
+          </div>
+          <div nz-submenu nzTitle="其他" nzIcon="setting">
+            <div nz-menu-item (click)="routerClick('SYS_SETTING')">系统设置</div>
+            <div nz-menu-item (click)="routerClick('SYS_CLEAR_CACHE')">清除缓存</div>
+          </div>
+        </div>
+  
+      </div>
+  
+  
+      <!-- 底部收缩栏 -->
+      <div class="flex-txt-center" style="flex:0 0 40px;box-shadow: 0.5px #888888;" (click)="doTypesetting()">
+        <i style="font-size: 16px; color: #6495ed;" nz-icon [nzType]=" isCollapsed ? 'left' : 'right'"
+          nzTheme="outline"></i>
+      </div>
+  
+    </div>
+  
+    <!-- 第二部分 单页展示 -->
+    <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;background-color: #F0F2F5;">
+  
+      <!-- 头部搜索栏 -->
+      <div class="flex-row mx-start sx-center"
+        style="flex: 0 0 60px;margin:10px 15px;border-radius: 4px;background-color:#FFF;">
+  
+        <div class="flex-txt-center" style="flex:1 1 auto;height:55px;margin:10px 0px;">
+          
+  
+        </div>
+        <div class="flex-row mx-end sx-center" style="flex:0 0 30%;height:55px;margin-left:20px;">
+          <div class="flex-txt-center" style="flex:0 auto;height: 100%;">
+            <nz-avatar nzIcon="user" [nzSize]="30" nzSrc="../../../assets/imgs/users/user-h-img.jpg"></nz-avatar>
+          </div>
+          <div class="flex-txt-center" style="flex:0 0 60px;height:100%;">
+            <button style="overflow: hidden;color:rgba(00, 00, 00, 0.45)" nzType="link" nzSize="small" nz-button
+              nzTrigger="click" nzPlacement="bottomCenter" nz-dropdown [nzDropdownMenu]="menu">
+              Admin
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item (click)="openUserInfo()">个人信息</li>
+                <li nz-menu-item>密码修改</li>
+                <li nz-menu-item>账号绑定</li>
+                <li nz-menu-item>退出</li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+      </div>
+  
+      <!-- 主内容区 -->
+      <div class="flex-column mx-start sx-stretch" style="flex: 1 0 auto;margin:10px 15px;border-radius: 4px;background-color:#FFF;border:1px solid red;">
+  
+        <router-outlet style="display:none;"></router-outlet>
+  
+      </div>
+  
+      <!-- 尾部 -->
+      <div class="flex-column mx-center sx-stretch"
+        style="flex: 0 0 60px;margin:5px 15px 20px 15px;border-radius: 4px;background-color:#FFF;">
+  
+        <div class="flex-row mx-center sx-center" style="flex:0 0 auto;font-size: 14px;">
+          <div style="flex:0 0 auto;">纸上得来终觉浅，绝知此事要躬行</div>
+          <div style="flex:0 0 auto;margin: 0px 5px;"><i nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i></div>
+        </div>
+  
+        <!-- <div class="flex-txt-center" style="flex:0 0 auto;font-size: 6px;">© 2020 QuickLearm 博客系统 </div> -->
+  
+      </div>
+    </div>
+  </div>
