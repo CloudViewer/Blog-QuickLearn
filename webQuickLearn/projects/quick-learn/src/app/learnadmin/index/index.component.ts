@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
   userImg: string = '../../../assets/imgs/users/user-h-img.jpg';  // 头像 暂且写死
 
 
-  constructor(private drawerService: NzDrawerService,private modalService: NzModalService,private router: Router) {}
+  constructor(private drawerService: NzDrawerService, private modalService: NzModalService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,11 +26,33 @@ export class IndexComponent implements OnInit {
    * 根据code 路由到不同地址
    * @param code 
    */
-  menuClick(code){
+  menuClick(code: string) {
     // TODO: 后续添加实现...
     console.log(code)
-    // this.router.navigateByUrl('learnadmin/home');
+    switch (code) {
+      case 'HOME':
+        this.redirect('learnadmin/home/main');
+        break;
+      case 'USER_LIST':
+        this.redirect('learnadmin/user/list');
+      case 'BLOG_LIST':
+        this.redirect('learnadmin/blog/list');
+        break;
+      case 'BLOG_AUDIT_LIST':
+        this.redirect('learnadmin/blog/audit');
+        break;
+      default:
+        this.redirect('learnadmin');
+        break;
+    }
+
   }
+
+
+  redirect(url: string) {
+    this.router.navigateByUrl(url);
+  }
+
 
 
   /**
@@ -46,7 +68,7 @@ export class IndexComponent implements OnInit {
    */
   openUserInfo() {
     // TODO: 头部导航栏的信息实现(待处理)...
-    
+
     // console.log('headClick()');
     // const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
     //   nzTitle: '用户信息',
