@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
-import { UserInfoComponent } from '../user-info/user-info.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -68,21 +67,21 @@ export class IndexComponent implements OnInit {
 
   openUserInfo() {
     
-    console.log('headClick()');
-    const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
-      nzTitle: '用户信息',
-      nzWidth: '640px',
-      nzMaskClosable: false, // 点击蒙层是否允许关闭
-      nzContent: UserInfoComponent,
-      nzContentParams: {
-        val: 'obj'
-      }
-    });
+    // console.log('headClick()');
+    // const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
+    //   nzTitle: '用户信息',
+    //   nzWidth: '640px',
+    //   nzMaskClosable: false, // 点击蒙层是否允许关闭
+    //   nzContent: UserInfoComponent,
+    //   nzContentParams: {
+    //     val: 'obj'
+    //   }
+    // });
 
-    // 关闭回调
-    drawerRef.afterClose.subscribe(data => {
-      console.log(data)
-    });
+    // // 关闭回调
+    // drawerRef.afterClose.subscribe(data => {
+    //   console.log(data)
+    // });
   }
 
 }
