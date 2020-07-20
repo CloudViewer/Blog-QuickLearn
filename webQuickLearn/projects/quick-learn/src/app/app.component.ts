@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'quick-learn';
-  isLogin: boolean = true;
+  isLogin: boolean = false;
 
   showLoading: boolean = true;
 
@@ -25,17 +25,18 @@ export class AppComponent {
 
     if (!this.isLogin) {
 
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/learnadmin');
+      this.showLoading = true;
+      this.connectModel = 'websocket';
       setTimeout(() => {
-        this.showLoading = true;
-        this.connectModel = 'websocket';
+        this.showLoading = false;
       }, 2000);
-      // this.router.navigateByUrl('/learnadmin');
+
     } else {
       this.showLoading = true;
       this.connectModel = 'http';
-      // this.router.navigateByUrl('/login');
-      this.router.navigateByUrl('/learnadmin');
+      this.router.navigateByUrl('/login');
+      // this.router.navigateByUrl('/learnadmin');
     }
   }
 }
