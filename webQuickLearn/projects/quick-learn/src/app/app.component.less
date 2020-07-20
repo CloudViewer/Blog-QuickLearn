@@ -1,0 +1,36 @@
+.loadingbar {
+    animation: mymove 1.5s infinite;
+}
+
+
+@keyframes mymove {
+    0% {
+        left                             : -100px;
+        background-color                 : transparent;
+        -webkit-animation-timing-function: ease-in;
+    }
+
+    25% {
+        left                             : 25%;
+        background-color                 : #ff0057;
+        -webkit-animation-timing-function: linear;
+    }
+
+    50% {
+        left                             : 50%;
+        background-color                 : #ffe500;
+        -webkit-animation-timing-function: linear;
+    }
+
+    70% {
+        left                             : 70%;
+        background-color                 : #89ff00;
+        -webkit-animation-timing-function: linear;
+    }
+
+    100% {
+        left                             : 100%;
+        background-color                 : transparent;
+        -webkit-animation-timing-function: ease-out;
+    }
+}
