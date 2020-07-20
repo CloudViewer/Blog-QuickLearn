@@ -10,62 +10,42 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit {
 
-  public code?: string;
-  isCollapsed: boolean = false;
-  style: string = '0 0 237px';
-  userImg: string = '../../../assets/imgs/users/user-h-img.jpg';
-  visible = false;
-  openMap: { [name: string]: boolean } = {
-    sub1: true,
-    sub2: false,
-    sub3: false
-  };
+  isCollapsed: boolean = false;  // 控制菜单的变化
+  style: string = '0 0 200px';  // 左侧菜单栏布局 0 0 200px; 默认宽度200px 不增长 不缩小
+  userImg: string = '../../../assets/imgs/users/user-h-img.jpg';  // 头像 暂且写死
 
-  constructor(private drawerService: NzDrawerService,private modalService: NzModalService,private router: Router) {
-    
-  }
+
+  constructor(private drawerService: NzDrawerService,private modalService: NzModalService,private router: Router) {}
 
   ngOnInit() {
-    // this.code = '111';
-    // console.log(this.code)
-    // const ec = echarts as any;
-    // const lineChart = ec.init(document.getElementById('lineChart'));
-    // lineChart.setOption(this.hartOption);
-    // fromEvent(window, "resize").subscribe((event: any) => {
-
-    //   console.log("浏览器的宽：", event.target.innerWidth)
-    //   console.log("浏览器的高：", event.target.innerHeight)
-
-    // })
   }
 
 
-  routerClick(type){
-    console.log(type)
+  /**
+   * 菜单点击
+   * 根据code 路由到不同地址
+   * @param code 
+   */
+  menuClick(code){
+    // TODO: 后续添加实现...
+    console.log(code)
     // this.router.navigateByUrl('learnadmin/home');
   }
 
 
-
-
-
-
-  doTypesetting() {
+  /**
+   * 左侧比例设置
+   */
+  doMenuSetting() {
     this.isCollapsed = this.isCollapsed ? false : true;
-    this.style = this.isCollapsed ? '0 0 150px' : '0 0 300px'
+    this.style = this.isCollapsed ? '0 0 90px' : '0 0 200px'
   }
 
-
-  openHandler(value: string): void {
-    for (const key in this.openMap) {
-      if (key !== value) {
-        this.openMap[key] = false;
-      }
-    }
-  }
-
-
+  /**
+   * 弹出个人信息框
+   */
   openUserInfo() {
+    // TODO: 头部导航栏的信息实现(待处理)...
     
     // console.log('headClick()');
     // const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
