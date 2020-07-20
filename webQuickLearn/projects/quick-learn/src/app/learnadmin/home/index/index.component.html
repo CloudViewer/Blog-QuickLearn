@@ -16,34 +16,34 @@
   
         <!-- 菜单主体 -->
         <div class="blog-menu" nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" style="flex:1 0 auto;">
-          <div  nz-menu-item (click)="routerClick('HOME')"><i nz-icon nzType="home" nzTheme="outline"></i>{{isCollapsed ? '' : '主页'}}</div>
+          <div  nz-menu-item (click)="menuClick('HOME')"><i nz-icon nzType="home" nzTheme="outline"></i>{{isCollapsed ? '' : '主页'}}</div>
           <div nz-submenu nzTitle="用户管理" nzIcon="user">
-            <div nz-menu-item (click)="routerClick('USER_LIST')">用户列表</div>
-            <div nz-menu-item (click)="routerClick('NO')">待开发.....</div>
+            <div nz-menu-item (click)="menuClick('USER_LIST')">用户列表</div>
+            <div nz-menu-item (click)="menuClick('NO')">待开发.....</div>
           </div>
           <div nz-submenu nzTitle="博客管理" nzIcon="form">
-            <div nz-menu-item (click)="routerClick('BOOK_LIST')">博客列表</div>
-            <div nz-menu-item (click)="routerClick('BOOK_AUDIT_LIST')">待审核</div>
+            <div nz-menu-item (click)="menuClick('BOOK_LIST')">博客列表</div>
+            <div nz-menu-item (click)="menuClick('BOOK_AUDIT_LIST')">待审核</div>
           </div>
           <div nz-submenu nzTitle="模板管理" nzIcon="edit">
-            <div nz-menu-item (click)="routerClick('TEMPLATE_LIST')">模板列表</div>
-            <div nz-menu-item (click)="routerClick('NO')">待开发...</div>
+            <div nz-menu-item (click)="menuClick('TEMPLATE_LIST')">模板列表</div>
+            <div nz-menu-item (click)="menuClick('NO')">待开发...</div>
           </div>
           <div nz-submenu nzTitle="广告管理" nzIcon="notification">
-            <div nz-menu-item (click)="routerClick('AD_LIST')">广告列表</div>
-            <div nz-menu-item (click)="routerClick('AD_AUDIT')">广告审核</div>
+            <div nz-menu-item (click)="menuClick('AD_LIST')">广告列表</div>
+            <div nz-menu-item (click)="menuClick('AD_AUDIT')">广告审核</div>
           </div>
           <div nz-submenu nzTitle="日志管理" nzIcon="file">
-            <div nz-menu-item (click)="routerClick('LOG_LOGIN_LIST')">登录日志</div>
-            <div nz-menu-item (click)="routerClick('LOG_OPERATE_LIST')">操作日志</div>
+            <div nz-menu-item (click)="menuClick('LOG_LOGIN_LIST')">登录日志</div>
+            <div nz-menu-item (click)="menuClick('LOG_OPERATE_LIST')">操作日志</div>
           </div>
           <div nz-submenu nzTitle="权限管理" nzIcon="key">
-            <div nz-menu-item (click)="routerClick('ADMIN_AUTH')">管理员权限</div>
-            <div nz-menu-item (click)="routerClick('ADMIN_MENU')">菜单权限</div>
+            <div nz-menu-item (click)="menuClick('ADMIN_AUTH')">管理员权限</div>
+            <div nz-menu-item (click)="menuClick('ADMIN_MENU')">菜单权限</div>
           </div>
           <div nz-submenu nzTitle="其他" nzIcon="setting">
-            <div nz-menu-item (click)="routerClick('SYS_SETTING')">系统设置</div>
-            <div nz-menu-item (click)="routerClick('SYS_CLEAR_CACHE')">清除缓存</div>
+            <div nz-menu-item (click)="menuClick('SYS_SETTING')">系统设置</div>
+            <div nz-menu-item (click)="menuClick('SYS_CLEAR_CACHE')">清除缓存</div>
           </div>
         </div>
   
@@ -51,7 +51,7 @@
   
   
       
-      <div class="flex-txt-center" style="flex:0 0 40px;box-shadow: 0.5px #888888;" (click)="doTypesetting()">
+      <div class="flex-txt-center" style="flex:0 0 40px;box-shadow: 0.5px #888888;" (click)="doMenuSetting()">
         <i style="font-size: 16px; color: #6495ed;" nz-icon [nzType]=" isCollapsed ? 'left' : 'right'" nzTheme="outline"></i>
       </div>
   
