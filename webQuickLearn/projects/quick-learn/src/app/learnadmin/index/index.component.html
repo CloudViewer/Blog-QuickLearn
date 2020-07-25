@@ -65,8 +65,8 @@
   
         <div class="flex-txt-center" style="flex:1 1 auto;height:55px;margin:10px 0px;">
           
-  
         </div>
+        <!-- 头像地址 -->
         <div class="flex-row mx-end sx-center" style="flex:0 0 30%;height:55px;margin-left:20px;">
           <div class="flex-txt-center" style="flex:0 auto;height: 100%;">
             <nz-avatar nzIcon="user" [nzSize]="30" nzSrc="../../../assets/imgs/users/user-h-img.jpg"></nz-avatar>
@@ -88,21 +88,17 @@
         </div>
       </div>
   
-      
+      <!-- 主体内容 -->
       <div class="flex-column mx-start sx-stretch" style="flex: 1 0 auto;margin:10px 15px;border-radius: 4px;background-color:#FFF;border:1px solid red;">
-  
         <router-outlet style="display:none;width: 100%;height: 100%;"></router-outlet>
-  
       </div>
   
-      
-      <div class="flex-column mx-center sx-stretch"
-        style="flex: 0 0 60px;margin:5px 15px 20px 15px;border-radius: 4px;background-color:#FFF;">
-  
+      <!-- 尾部 -->
+      <div class="flex-column mx-center sx-stretch" style="flex: 0 0 60px;margin:5px 15px 20px 15px;border-radius: 4px;background-color:#FFF;">
         <div class="flex-row mx-center sx-center wrap" style="flex:0 0 auto;font-size: 14px;">
           <div style="flex:0 1 auto;">纸上得来终觉浅，绝知此事要躬行<i style="margin: 0px 5px;" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i></div>
         </div>
-  
       </div>
+
     </div> 
   </div>
