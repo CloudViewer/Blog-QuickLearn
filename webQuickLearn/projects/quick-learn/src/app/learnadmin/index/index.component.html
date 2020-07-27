@@ -16,7 +16,7 @@
   
         <!-- 菜单主体 -->
         <div class="blog-menu" nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" style="flex:1 0 auto;">
-          <div  nz-menu-item (click)="menuClick('HOME')"><i nz-icon nzType="home" nzTheme="outline"></i>{{isCollapsed ? '' : '主页'}}</div>
+          <div nz-menu-item [nzSelected] = "isHomeSelected" (click)="menuClick('HOME')"><i nz-icon nzType="home" nzTheme="outline"></i>{{isCollapsed ? '' : '主页'}}</div>
           <div nz-submenu nzTitle="用户管理" nzIcon="user">
             <div nz-menu-item (click)="menuClick('USER_LIST')">用户列表</div>
             <div nz-menu-item (click)="menuClick('NO')">待开发.....</div>
@@ -58,10 +58,9 @@
     </div>
   
     <!-- 第二部分 单页展示 -->
-    <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;background-color: #F0F2F5;">
+    <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;background-color: #F0F2F5;min-width: 100px;max-width: 100%;overflow-x: auto;">
   
-      <div class="flex-row mx-start sx-center"
-        style="flex: 0 0 60px;margin:10px 15px;border-radius: 4px;background-color:#FFF;">
+      <div class="flex-row mx-start sx-center" style="flex: 0 0 60px;margin:10px 15px;border-radius: 4px;background-color:#FFF;">
   
         <div class="flex-txt-center" style="flex:1 1 auto;height:55px;margin:10px 0px;">
           
@@ -89,8 +88,8 @@
       </div>
   
       <!-- 主体内容 -->
-      <div class="flex-column mx-start sx-stretch" style="flex: 1 0 auto;margin:10px 15px;border-radius: 4px;background-color:#FFF;border:1px solid red;">
-        <router-outlet style="display:none;width: 100%;height: 100%;"></router-outlet>
+      <div class="flex-column mx-start sx-stretch" style="flex: 1 1 auto;margin:10px 15px;border-radius: 4px;background-color:#FFF;">
+        <router-outlet style="display: none;"></router-outlet>
       </div>
   
       <!-- 尾部 -->
