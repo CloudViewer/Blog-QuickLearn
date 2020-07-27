@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
+  /**
+   * 为当前组件绑定Class
+   */
+  @HostBinding('class.flex-quick') get quickClass(){
+    return 'flex-quick';
+  }
+
   constructor() { }
 
   ngOnInit() {
+    // 初始化加载
+    console.log('app-main')
   }
 
 }

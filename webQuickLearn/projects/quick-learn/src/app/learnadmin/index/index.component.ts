@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
+// import { QuickTransferComponent } from 'projects/quick-transfer/src/public-api';
 
 @Component({
   selector: 'app-index',
@@ -12,12 +13,18 @@ export class IndexComponent implements OnInit {
 
   isCollapsed: boolean = false;  // 控制菜单的变化
   style: string = '0 0 200px';  // 左侧菜单栏布局 0 0 200px; 默认宽度200px 不增长 不缩小
-  userImg: string = '../../../assets/imgs/users/user-h-img.jpg';  // 头像 暂且写死
-
+  isHomeSelected: boolean = false;
 
   constructor(private drawerService: NzDrawerService, private modalService: NzModalService, private router: Router) { }
 
+
   ngOnInit() {
+    // 根据当前Url控制主页菜单是否选中
+    // console.log(this.trans)
+    const nowUrl = this.router.url;
+    const lastIndex = nowUrl.lastIndexOf('/');
+    const urlCode = nowUrl.substring(lastIndex + 1, nowUrl.length);
+    urlCode == 'home' ? this.isHomeSelected = true : this.isHomeSelected = false;
   }
 
 
@@ -31,10 +38,12 @@ export class IndexComponent implements OnInit {
     console.log(code)
     switch (code) {
       case 'HOME':
-        this.redirect('learnadmin/home/main');
+        // this.trans.redirectToUrl('learnadmin/home');
+        this.redirect('learnadmin/home');
         break;
       case 'USER_LIST':
         this.redirect('learnadmin/user/list');
+        break;
       case 'BLOG_LIST':
         this.redirect('learnadmin/blog/list');
         break;
@@ -48,7 +57,10 @@ export class IndexComponent implements OnInit {
 
   }
 
-
+  /**
+   * 根据传入的路由地址重定向到当前路由地址
+   * @param url 
+   */
   redirect(url: string) {
     this.router.navigateByUrl(url);
   }
