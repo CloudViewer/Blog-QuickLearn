@@ -25,7 +25,7 @@ export class AppComponent {
 
     if (!this.isLogin) {
 
-      this.router.navigateByUrl('/learnadmin/home');
+      // this.router.navigateByUrl('/learnadmin/home');
       this.showLoading = true;
       this.connectModel = 'websocket';
       setTimeout(() => {
@@ -35,7 +35,7 @@ export class AppComponent {
     } else {
       this.showLoading = true;
       this.connectModel = 'http';
-      this.router.navigateByUrl('/login');
+      // this.router.navigateByUrl('/login');
       // this.router.navigateByUrl('/learnadmin');
     }
   }
