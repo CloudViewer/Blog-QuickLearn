@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./learnlogin/learnlogin.module').then(m => m.LearnloginModule)
-  }
+  },
+  {
+    path: '**',
+    redirectTo: '/learnadmin/home'
+  },
 ];
 
 @NgModule({
