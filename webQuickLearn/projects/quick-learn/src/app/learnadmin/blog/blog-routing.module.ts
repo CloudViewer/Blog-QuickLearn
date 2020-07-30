@@ -6,6 +6,10 @@ import { BlogAuditComponent } from './blog-audit/blog-audit.component';
 
 const routes: Routes = [
   {
+    path:'**',
+    redirectTo:'list'
+  },
+  {
     path: 'list',
     component: BlogListComponent
   },
