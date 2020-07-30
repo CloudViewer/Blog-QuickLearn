@@ -18,7 +18,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     // 初始化加载
-    console.log('app-main')
   }
 
 }
