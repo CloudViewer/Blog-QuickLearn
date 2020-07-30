@@ -18,7 +18,7 @@
         <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;">
           <ul class="blog-menu" style="flex:1 1 auto;" nz-menu nzMode="inline"  [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
             
-            <!-- ng-container 在界面上是没有任何意义的，在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
+            <!-- ng-container 在界面上是没有任何意义的，#1890ff在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
             <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuData }"></ng-container>
             <ng-template #menuTpl let-menuData>
               <ng-container *ngFor="let item of menuData">
@@ -28,7 +28,7 @@
                     <a [routerLink]="'/' + item.routerLink"></a>
                 </li>
             
-                <li *ngIf="item.children.length > 0" [nzOpen]="item.isOpen"  nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon.type">
+                <li *ngIf="item.children.length > 0" [ngStyle]="{'color': item.isOpen ? '#1890ff' : ''}"  [nzOpen]="item.isOpen"  nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon.type">
                     <ul>
                       <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: item.children }"></ng-container>
                     </ul>
@@ -62,7 +62,7 @@
           </div>
           <div class="flex-txt-center" style="flex:0 0 60px;height:100%;">
             <button style="overflow: hidden;color:rgba(00, 00, 00, 0.45)" nzType="link" nzSize="small" nz-button
-              nzTrigger="click" nzPlacement="bottomCenter" nz-dropdown [nzDropdownMenu]="menu">
+              nzTrigger="hover" nzPlacement="bottomCenter" nz-dropdown [nzDropdownMenu]="menu">
               Admin
             </button>
             <nz-dropdown-menu #menu="nzDropdownMenu">
