@@ -2,7 +2,7 @@
     <div class="flex-column mx-start sx-stretch" [ngStyle]="{'flex': style,'background-color':'#FCFCFC'}">
       <!-- 菜单列表 -->
       <div class="flex-column mx-start sx-stretch"  style="flex:1 1 auto;margin: 5px 5px;">
-        <div  class="flex-txt-center" style="flex:0 0 50px;border-radius:4px;margin-bottom:5px;
+        <div class="flex-txt-center" style="flex:0 0 50px;border-radius:4px;margin-bottom:5px;
                   font-family:Arial,Helvetica,sans-serif;
                   font-size:1.5em;
                   vertical-align:middle;
@@ -11,24 +11,24 @@
                   background-image: url('../../../assets/imgs/users/timg.jpg');
                   background-size:100% 100%;
                   background-repeat:no-repeat;">
-                {{isCollapsed ? 'Q':'QuickLearn'}}
+              {{isCollapsed ? 'Q':'QuickLearn'}}
         </div>
 
         
         <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;">
-          <ul class="blog-menu" style="flex:1 1 auto;" nz-menu nzMode="inline"  [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
+          <ul class="blog-menu" style="flex:1 1 auto;" (nzClick)="menuClick($event)" nz-menu nzMode="inline"  [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
             
-            <!-- ng-container 在界面上是没有任何意义的，#1890ff在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
+            <!-- ng-container 在界面上是没有任何意义的，在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
             <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuData }"></ng-container>
             <ng-template #menuTpl let-menuData>
               <ng-container *ngFor="let item of menuData">
-                <li *ngIf="item.children.length == 0" nz-menu-item nzMatchRouter  [nzPaddingLeft]="1 * 24">
+                <li *ngIf="item.children.length == 0" nz-menu-item nzMatchRouter (click)="itemMenuClick(item.fid)"  [nzPaddingLeft]="item.lev * 24">
                     <i nz-icon [nzType]="item.icon.type"></i>
                     <span>{{item.title }}</span>
                     <a [routerLink]="'/' + item.routerLink"></a>
                 </li>
             
-                <li *ngIf="item.children.length > 0" [ngStyle]="{'color': item.isOpen ? '#1890ff' : ''}"  [nzOpen]="item.isOpen"  nz-submenu [nzTitle]="item.title" [nzIcon]="item.icon.type">
+                <li *ngIf="item.children.length > 0" nz-submenu [nzOpen]="item.isOpen" [nzPaddingLeft]="item.lev * 24" [ngStyle]="{'color': item.color}" [nzTitle]="item.title" [nzIcon]="item.icon.type">
                     <ul>
                       <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: item.children }"></ng-container>
                     </ul>
@@ -42,7 +42,7 @@
       </div>
       
       <div class="flex-txt-center" style="flex:0 0 40px;box-shadow: 0.5px #888888;" (click)="doMenuSetting()">
-        <i style="font-size: 16px; color: #6495ed;" nz-icon [nzType]=" isCollapsed ? 'left' : 'right'" nzTheme="outline"></i>
+        <i style="font-size: 16px;" [ngStyle]="{'color': themeColor}" nz-icon [nzType]=" isCollapsed ? 'left' : 'right'" nzTheme="outline"></i>
       </div>
 
     </div>
@@ -85,7 +85,7 @@
       <!-- 尾部 -->
       <div class="flex-column mx-center sx-stretch" style="flex: 0 0 60px;margin:5px 15px 20px 15px;border-radius: 4px;background-color:#FFF;">
         <div class="flex-row mx-center sx-center wrap" style="flex:0 0 auto;font-size: 14px;">
-          <div style="flex:0 1 auto;">纸上得来终觉浅，绝知此事要躬行<i style="margin: 0px 5px;" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i></div>
+          <div style="flex:0 1 auto;margin:0px 5px;">纸上得来终觉浅，绝知此事要躬行<i style="margin: 0px 5px;" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i></div>
         </div>
       </div>
 
