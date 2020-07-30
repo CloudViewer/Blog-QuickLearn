@@ -86,7 +86,7 @@ export class IndexComponent implements OnInit {
             isDisabled: false,
           }
         ],
-        isOpen: true,
+        isOpen: false,
         isDisabled: false,
       },
       {
