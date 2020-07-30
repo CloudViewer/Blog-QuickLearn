@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NzDrawerService, NzModalService } from 'ng-zorro-antd';
-import { Router, ActivatedRoute } from '@angular/router';
+import { NzDrawerService, NzModalService, NzMenuItemDirective } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,13 +12,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class IndexComponent implements OnInit {
 
 
-  // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
-  style: string = '0 0 240px';
 
-  // 菜单数据
-  menuData: any;
+  themeColor: string = '#1890ff'
+  menuData: any[];              // 菜单数据
+  links: any[];                 // 链接
+  style: string = '0 0 240px';  // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
+  isCollapsed: boolean = false; // 控制菜单缩进
 
-  isCollapsed: boolean = false;
 
 
   constructor(private drawerService: NzDrawerService, private modalService: NzModalService, private router: Router) { }
@@ -32,6 +32,13 @@ export class IndexComponent implements OnInit {
    * 数据初始化
    */
   drawInit() {
+
+    // 每次初始化都进行清空防止数据重复
+    this.links = [];
+
+    // 获取当前地址
+    const nowLink = this.router.url.slice(1, this.router.url.length);
+    console.log(nowLink)
     const menus = [
       {
         title: '主页',
@@ -41,7 +48,7 @@ export class IndexComponent implements OnInit {
           type: 'home',
           theme: ''
         },
-        routerParam: 'ADMIN_Home',
+        lev: 1,
         routerLink: 'learnadmin/home',
         children: [],
         isSelected: false,
@@ -55,6 +62,7 @@ export class IndexComponent implements OnInit {
           type: 'user',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -65,7 +73,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_USER_LIST',
+            lev: 2,
             routerLink: 'learnadmin/user/list',
             children: [],
             isSelected: false,
@@ -79,7 +87,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_USER_NONE',
+            lev: 2,
             routerLink: 'learnadmin/user/none',
             children: [],
             isSelected: false,
@@ -97,6 +105,7 @@ export class IndexComponent implements OnInit {
           type: 'form',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -107,7 +116,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_BLOG_LIST',
+            lev: 2,
             routerLink: 'learnadmin/blog/list',
             children: [],
             isSelected: false,
@@ -121,7 +130,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_BLOG_AUDIT',
+            lev: 2,
             routerLink: 'learnadmin/blog/audit',
             children: [],
             isSelected: false,
@@ -139,6 +148,7 @@ export class IndexComponent implements OnInit {
           type: 'edit',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -149,7 +159,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_TEMPLATE_LIST',
+            lev: 2,
             routerLink: 'learnadmin/template/list',
             children: [],
             isSelected: false,
@@ -163,7 +173,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_TEMPLATE_NONE',
+            lev: 2,
             routerLink: 'learnadmin/template/none',
             children: [],
             isSelected: false,
@@ -181,6 +191,7 @@ export class IndexComponent implements OnInit {
           type: 'notification',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -191,7 +202,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_ADVERT_LIST',
+            lev: 2,
             routerLink: 'learnadmin/advert/list',
             children: [],
             isSelected: false,
@@ -205,7 +216,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_ADVERT_AUDIT',
+            lev: 2,
             routerLink: 'learnadmin/advert/audit',
             children: [],
             isSelected: false,
@@ -223,6 +234,7 @@ export class IndexComponent implements OnInit {
           type: 'file',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -233,7 +245,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_LOGINLOG_LIST',
+            lev: 2,
             routerLink: 'learnadmin/loginlog/list',
             children: [],
             isSelected: false,
@@ -247,7 +259,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_OPERATELOG_LIST',
+            lev: 2,
             routerLink: 'learnadmin/operatelog/list',
             children: [],
             isSelected: false,
@@ -265,6 +277,7 @@ export class IndexComponent implements OnInit {
           type: 'key',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -275,7 +288,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_ADMIN_AUTO',
+            lev: 2,
             routerLink: 'learnadmin/admin/auth',
             children: [],
             isSelected: false,
@@ -289,7 +302,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_MENU_AUTO',
+            lev: 2,
             routerLink: 'learnadmin/menu/auth',
             children: [],
             isSelected: false,
@@ -307,6 +320,7 @@ export class IndexComponent implements OnInit {
           type: 'setting',
           theme: ''
         },
+        lev: 1,
         routerLink: '',
         children: [
           {
@@ -317,7 +331,7 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_SYS_SETTING',
+            lev: 2,
             routerLink: 'learnadmin/sys/setting',
             children: [],
             isSelected: false,
@@ -331,9 +345,39 @@ export class IndexComponent implements OnInit {
               type: '',
               theme: ''
             },
-            routerParam: 'ADMIN_CLEAR_CACHE',
+            lev: 2,
             routerLink: 'learnadmin/clear/cache',
-            children: [],
+            children: [
+              {
+                title: '清除-1',
+                mid: 23,
+                fid: 22,
+                icon: {
+                  type: '',
+                  theme: ''
+                },
+                lev: 3,
+                routerLink: 'learnadmin/clear/cache',
+                children: [
+                  {
+                    title: '清除-2',
+                    mid: 24,
+                    fid: 23,
+                    icon: {
+                      type: '',
+                      theme: ''
+                    },
+                    lev: 4,
+                    routerLink: 'learnadmin/clear/cache',
+                    children: [],
+                    isSelected: false,
+                    isDisabled: false,
+                  }
+                ],
+                isSelected: false,
+                isDisabled: false,
+              }
+            ],
             isSelected: false,
             isDisabled: false,
           }
@@ -343,33 +387,116 @@ export class IndexComponent implements OnInit {
       }
     ];
 
-    this.menuData = menus;
-    this.findByRouterRS(menus, this.router.url.slice(1, -1));
+    // 查找当前菜单的地址 返回this.links [{mid:xx,fid:xx,link:'xx'}]
+    this.findAllLinksRS(menus);
+
+
+    let linkObj = this.findByLink(this.links, nowLink);
+
+
+    // 通过fid 找到对应的父级菜单
+    this.menuData = this.findByFidRS(menus, linkObj.fid);
   }
 
   /**
-   * 递归查找路由
+   * 子菜单按钮点击
+   * @param fid 
    */
-  findByRouterRS(menus: any[], link: string) {
-    console.log(menus);
-    console.log(link)
+  itemMenuClick(fid: number) {
+    this.nodeManage(this.menuData, fid);
+  }
 
+  /**
+   * 节点处理
+   * @param menus 
+   * @param fid 
+   */
+  nodeManage(menus: any[], fid: number) {
+    fid == 0 ? this.zeroManage(menus, fid) : this.fidManage(menus, fid);
+  }
+
+  /**
+   * fid 处理
+   * @param menus 
+   * @param fid 
+   */
+  fidManage(menus: any[], fid: number) {
+    // TODO 待优化()...
+    for (let i = 0; i < menus.length; i++) {
+      if (menus[i].mid == fid) {
+        menus[i].color = this.themeColor;
+      } else {
+        menus[i].color = '';
+        this.fidManage(menus[i].children, menus[i].fid);
+      }
+    }
+  }
+
+  menuClick(event:NzMenuItemDirective){
+    console.log(event)
+  }
+
+  /**
+   * 当 fid 为一级菜单时的处理
+   * @param menus 
+   * @param fid 
+   */
+  zeroManage(menus: any[], fid: number) {
+    // 给每个一级菜单颜色置空
+    menus.forEach(item => {
+      if (item.children.length > 0) {
+        item.color = '';
+        this.zeroManage(item.children, fid)
+      }
+    });
+  }
+
+
+  /**
+   * 根据菜单id查找
+   * @param menus 菜单数据
+   * @param fid 菜单id
+   */
+  findByFidRS(menus: any[], fid: number) {
+    for (let i = 0; i < menus.length; i++) {
+      if (menus[i].mid == fid) {
+        menus[i].isOpen = true;
+        menus[i].color = this.themeColor;
+      }
+    }
+    return menus;
+  }
+
+  /**
+   * 获取菜单所以菜单链接
+   * @param menus 菜单数据
+   */
+  findAllLinksRS(menus: any[]) {
+    menus.forEach(menu => {
+      menu.children.length > 0 ? this.findAllLinksRS(menu.children) : this.links.push({ mid: menu.mid, fid: menu.fid, link: menu.routerLink });
+    });
+  }
+
+  /**
+   * 根据链接查找
+   * @param link 
+   */
+  findByLink(links: any[], link: string) {
+    for (let i = 0; i < links.length; i++) {
+      if (link.indexOf(links[i].link) != -1) {
+        return links[i];
+      }
+    }
   }
 
   /**
    * 菜单设置
    */
   doMenuSetting() {
-    // this.menuTree.doMenuSetting();
     this.isCollapsed = this.isCollapsed ? false : true;
     this.style = this.isCollapsed ? '0 0 90px' : '0 0 240px'
   }
 
-
-  subMenuOpenChange(item: any) {
-    console.log('click')
-    console.log(item)
-  }
 
 
 

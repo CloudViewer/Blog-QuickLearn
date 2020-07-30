@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/learnadmin/home'
+    redirectTo: 'learnadmin'
   },
 ];
 
