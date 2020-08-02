@@ -13,22 +13,23 @@
                   background-repeat:no-repeat;">
               {{isCollapsed ? 'Q':'QuickLearn'}}
         </div>
+        
 
         
         <div class="flex-column mx-start sx-stretch" style="flex:1 1 auto;">
-          <ul class="blog-menu" style="flex:1 1 auto;" (nzClick)="menuClick($event)" nz-menu nzMode="inline"  [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
+          <ul class="blog-menu" style="flex:1 1 auto;"  nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
             
             <!-- ng-container 在界面上是没有任何意义的，在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
             <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuData }"></ng-container>
             <ng-template #menuTpl let-menuData>
               <ng-container *ngFor="let item of menuData">
-                <li *ngIf="item.children.length == 0" nz-menu-item nzMatchRouter (click)="itemMenuClick(item.fid)"  [nzPaddingLeft]="item.lev * 24">
+                <li *ngIf="item.children.length == 0" nz-menu-item nzMatchRouter  (click)="itemMenuClick(item)"  [nzPaddingLeft]="item.lev * 24">
                     <i nz-icon [nzType]="item.icon.type"></i>
                     <span>{{item.title }}</span>
                     <a [routerLink]="'/' + item.routerLink"></a>
                 </li>
             
-                <li *ngIf="item.children.length > 0" nz-submenu [nzOpen]="item.isOpen" [nzPaddingLeft]="item.lev * 24" [ngStyle]="{'color': item.color}" [nzTitle]="item.title" [nzIcon]="item.icon.type">
+                <li *ngIf="item.children.length > 0" nz-submenu [nzOpen]="item.open" [nzPaddingLeft]="item.lev * 24" [ngStyle]="{'color': item.color}" [nzTitle]="item.title" [nzIcon]="item.icon.type">
                     <ul>
                       <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: item.children }"></ng-container>
                     </ul>

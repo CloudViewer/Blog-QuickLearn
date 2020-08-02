@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'list',
     component: UserListComponent
-  },
+  }
 ];
 
 @NgModule({
