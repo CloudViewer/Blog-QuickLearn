@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuickTransferService {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  public redirectToUrl(url: string): void {
-    this.router.navigateByUrl(url);
+  public openService() {
+    return new Promise((resolve) => {
+      resolve({name:'异步回调'});
+    })
   }
 
 
