@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzDrawerService, NzModalService, NzMenuItemDirective, } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../learncomm/utils.service';
+import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
 
 
 @Component({
@@ -25,11 +26,13 @@ export class IndexComponent implements OnInit {
     private drawerService: NzDrawerService,
     private modalService: NzModalService,
     private router: Router,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private quickTransfer: QuickTransferService
   ) { }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    console.log(await this.quickTransfer.openService())
     this.drawInit();
   }
 
@@ -153,7 +156,7 @@ export class IndexComponent implements OnInit {
             lev: 2,
             routerLink: 'learnadmin/blog/list',
             children: [
-              
+
             ],
             open: false,
             selected: false,
