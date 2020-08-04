@@ -3,6 +3,7 @@ import { NzDrawerService, NzModalService, NzMenuItemDirective, } from 'ng-zorro-
 import { Router } from '@angular/router';
 import { UtilsService } from '../../learncomm/utils.service';
 import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
+import { EventManager } from '@angular/platform-browser';
 
 
 @Component({
@@ -16,9 +17,11 @@ export class IndexComponent implements OnInit {
 
 
   themeColor: string = '#1890ff'
-  menuData: any[];              // 菜单数据
-  style: string = '0 0 240px';  // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
-  isCollapsed: boolean = false; // 控制菜单缩进,
+  menuData: any[];                // 菜单数据
+  style: string = '0 0 220px';    // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
+  isCollapsed: boolean = false;   // 控制菜单缩进,
+  isFullscreen: boolean = false;  // 是否全屏
+  isLock: boolean = false;
 
 
 
@@ -27,12 +30,15 @@ export class IndexComponent implements OnInit {
     private modalService: NzModalService,
     private router: Router,
     private utils: UtilsService,
-    private quickTransfer: QuickTransferService
+    private quickTransfer: QuickTransferService,
+    private eventManager: EventManager
+
   ) { }
 
 
   async ngOnInit() {
-    console.log(await this.quickTransfer.openService())
+    console.log(this.utils.toArray(''))
+    console.log(await this.quickTransfer.openService());
     this.drawInit();
   }
 
@@ -310,7 +316,59 @@ export class IndexComponent implements OnInit {
    */
   doMenuSetting() {
     this.isCollapsed = this.isCollapsed ? false : true;
-    this.style = this.isCollapsed ? '0 0 90px' : '0 0 240px'
+    this.style = this.isCollapsed ? '0 0 80px' : '0 0 220px'
+  }
+
+  /**
+   * 全屏事件
+   */
+  doFullscreen() {
+    if (!this.isFullscreen) {
+      const docElmWithBrowsersFullScreenFunctions = document.documentElement as HTMLElement & {
+        mozRequestFullScreen(): Promise<void>;
+        webkitRequestFullscreen(): Promise<void>;
+        msRequestFullscreen(): Promise<void>;
+      };
+      if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
+        docElmWithBrowsersFullScreenFunctions.requestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) { // Firefox 
+        docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) { // Chrome, Safari and Opera 
+        docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) { // IE/Edge 
+        docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
+      }
+      this.isFullscreen = true;
+    } else {
+      const docWithBrowsersExitFunctions = document as Document & {
+        mozCancelFullScreen(): Promise<void>;
+        webkitExitFullscreen(): Promise<void>;
+        msExitFullscreen(): Promise<void>;
+      };
+      if (docWithBrowsersExitFunctions.exitFullscreen) {
+        docWithBrowsersExitFunctions.exitFullscreen();
+      } else if (docWithBrowsersExitFunctions.mozCancelFullScreen) { // Firefox 
+        docWithBrowsersExitFunctions.mozCancelFullScreen();
+      } else if (docWithBrowsersExitFunctions.webkitExitFullscreen) { // Chrome, Safari and Opera 
+        docWithBrowsersExitFunctions.webkitExitFullscreen();
+      } else if (docWithBrowsersExitFunctions.msExitFullscreen) { // IE/Edge 
+        docWithBrowsersExitFunctions.msExitFullscreen();
+      }
+      this.isFullscreen = false;
+    }
+  }
+
+  /**
+   * 监听浏览器大小改变
+   */
+  windowFun = window.addEventListener("resize", () => {
+    let full_status = document['fullscreen'] || document['webkitIsFullScreen'] || document['mozFullScreen'] || false;
+    !full_status ? this.isFullscreen = false : this.isFullscreen = true;
+  })
+
+  
+  doLock() {
+    this.isLock ? this.isLock = false : this.isLock = true;
   }
 
 
