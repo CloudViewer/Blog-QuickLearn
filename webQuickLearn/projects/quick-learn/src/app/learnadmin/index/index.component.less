@@ -1,8 +1,83 @@
+.quick-head {
+    flex            : 0 0 65px;
+    box-shadow      : 0 1px 10px rgba(0, 0, 0, .2);
+    background-color: #1890ff;
+    z-index         : 15;
+}
+
+.quick-head-icon {
+    flex              : 0 0 50px;
+    height            : 35px;
+    color             : #FFF;
+    font-size         : 20px;
+    border-radius     : 2px;
+    transition: all .2s ease-in-out;
+}
+.quick-head-icon:hover {
+    background-color: #46A6FF;
+}
+
+
+
+.quick-menu-tree {
+    max-height: 940;
+    min-height: 200px;
+    overflow-y: scroll;
+    z-index   : 5;
+}
+
+.quick-menu-tree::-webkit-scrollbar {
+    display: none;
+}
+
+
+
 .blog-menu {
-    min-height: 100px;
-    max-height: 895px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    opacity   : 0.8;
+    min-height   : 100px;
+    max-height   : 900px;
+    overflow-y   : scroll;
+    overflow-x   : hidden;
+    opacity      : 0.8;
     border-radius: 4px;
+}
+
+.blog-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.quick-menu-favicon {
+    flex             : 0 0 50px;
+    border-radius    : 4px;
+    margin-bottom    : 5px;
+    font-family      : Arial, Helvetica, sans-serif;
+    font-size        : 1.5em;
+    vertical-align   : middle;
+    font-weight      : normal;
+    color            : rgba(0, 0, 0, 0.45);
+    background-color : #1890FF;
+    background-image : url(../../../assets/imgs/logo-full.svg);
+    background-size  : 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.quick-box {
+    flex            : 1 1 auto;
+    background-color: #F0F2F5;
+    min-width       : 100px;
+    max-width       : 100%;
+    overflow        : auto;
+}
+
+.quick-box-content {
+    flex            : 1 1 auto;
+    margin          : 10px 15px;
+    border-radius   : 4px;
+    background-color: #FFF;
+}
+
+.quick-box-footer {
+    flex            : 0 0 60px;
+    margin          : 5px 15px 20px 15px;
+    border-radius   : 4px;
+    background-color: #FFF;
 }
