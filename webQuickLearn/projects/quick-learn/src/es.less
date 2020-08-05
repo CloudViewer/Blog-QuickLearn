@@ -4,22 +4,20 @@
   font-family: '微软雅黑';
 }
 
-
 .flex-quick {
   display: flex;
   flex: 1 1 auto;
   flex-flow: column nowrap;
   justify-content:flex-start;
   align-items:stretch;
-  max-height: 880px;
+  max-height: 960px;
+  min-height: 200px;
   margin: 10px;
+  overflow-y: scroll;
 }
 .flex-quick::-webkit-scrollbar{
   display: none;
 }
-
-
-
 
 .ql-connectlip {
   position     : fixed;
@@ -40,6 +38,8 @@
   .ql-connectlip;
   background-color: #03A9F4;
 }
+
+
 
 .flex-row {
   display  : flex;
