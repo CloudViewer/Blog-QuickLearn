@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NzDrawerService, NzModalService, NzMenuItemDirective, } from 'ng-zorro-antd';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NzDrawerService, NzModalService, NzMenuItemDirective } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../learncomm/utils.service';
 import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
@@ -15,14 +15,21 @@ import { EventManager } from '@angular/platform-browser';
 export class IndexComponent implements OnInit {
 
 
+  private timeMsg: string = '上午好';
+  private themeColor: string = '#1890ff'
+  private menuData: any[];                // 菜单数据
+  private style: string = '0 0 220px';    // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
+  private isCollapsed: boolean = false;   // 控制菜单缩进,
+  private isFullscreen: boolean = false;  // 是否全屏  
 
-  themeColor: string = '#1890ff'
-  menuData: any[];                // 菜单数据
-  style: string = '0 0 220px';    // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
-  isCollapsed: boolean = false;   // 控制菜单缩进,
-  isFullscreen: boolean = false;  // 是否全屏
-  isLock: boolean = false;
-
+  private lock: any = {
+    isLock: false,           // 是否锁定
+    passwordVisible: false,  // 控制Lock状态下的输入框图标
+    password: '',            // Lock状态下的输入框值
+    tooltipTitle: '',
+    isClose: false,
+    lockScale_TIO: null
+  }
 
 
   constructor(
@@ -31,15 +38,14 @@ export class IndexComponent implements OnInit {
     private router: Router,
     private utils: UtilsService,
     private quickTransfer: QuickTransferService,
-    private eventManager: EventManager
-
+    private eventManager: EventManager,
   ) { }
 
 
   async ngOnInit() {
-    console.log(this.utils.toArray(''))
-    console.log(await this.quickTransfer.openService());
     this.drawInit();
+    this.timeMsg = this.getTimeMsg();
+
   }
 
   /**
@@ -195,6 +201,34 @@ export class IndexComponent implements OnInit {
   }
 
   /**
+   * 菜单左侧时间提示信息
+   */
+  getTimeMsg(): string {
+    const hours = this.utils.getSysDate().getHours();
+    if (hours >= 0 && hours < 6) {
+      return '熬夜冠军';
+    }
+    if (hours >= 6 && hours < 9) {
+      return '早上好';
+    }
+
+    if (hours >= 9 && hours < 12) {
+      return '上午好';
+    }
+
+    if (hours >= 12 && hours < 14) {
+      return '睡个午觉吧';
+    }
+
+    if (hours >= 14 && hours < 18) {
+      return '下午好';
+    }
+    if (hours >= 18 && hours < 24) {
+      return '晚上好';
+    }
+  }
+
+  /**
    * 子菜单按钮点击
    * @param item item
    */
@@ -259,7 +293,6 @@ export class IndexComponent implements OnInit {
   }
 
 
-  // 以下方法初始化时使用
   /**
    * 根据菜单id查找
    * @param menus 菜单数据
@@ -359,19 +392,33 @@ export class IndexComponent implements OnInit {
   }
 
   /**
-   * 监听浏览器大小改变
+   * 页面锁定
    */
-  windowFun = window.addEventListener("resize", () => {
-    let full_status = document['fullscreen'] || document['webkitIsFullScreen'] || document['mozFullScreen'] || false;
-    !full_status ? this.isFullscreen = false : this.isFullscreen = true;
-  })
-
-  
   doLock() {
-    this.isLock ? this.isLock = false : this.isLock = true;
+    if (this.lock.isLock) {
+      this.lock.isLock = false
+    } else {
+      clearTimeout(this.lock.lockScale_TIO);
+      this.lock.isLock = true;
+      this.lock.isClose = false;
+      this.lock.tooltipTitle = '兄die，体验过回车的力量吗！';
+    }
   }
 
-
+  /**
+   * 头部导航解锁
+   */
+  unLock() {
+    if (this.lock.password == "123456") {
+      this.lock.isClose = true;
+      clearTimeout(this.lock.lockScale_TIO);
+      this.lock.lockScale_TIO = setTimeout(() => {
+        this.lock.isLock = false;
+        this.lock.passwordVisible = false;
+        this.lock.password = '';
+      }, 200);
+    }
+  }
 
 
 
