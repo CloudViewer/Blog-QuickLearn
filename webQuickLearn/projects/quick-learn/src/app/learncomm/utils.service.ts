@@ -72,4 +72,11 @@ export class UtilsService {
   public deepCopy = (obj: any): any => {
     return JSON.parse(JSON.stringify(obj));
   }
+
+  /**
+   * 获取当前时间
+   */
+  public getSysDate = (): Date => {
+    return new Date();
+  }
 }
