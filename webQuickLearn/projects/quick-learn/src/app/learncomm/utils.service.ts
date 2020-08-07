@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { NzDrawerService } from 'ng-zorro-antd';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
+  private subject = new Subject<any>()
+
   constructor(
-    private router: Router
+    private router: Router,
+    private drawerService: NzDrawerService,
   ) { }
 
   /**
@@ -78,5 +83,9 @@ export class UtilsService {
    */
   public getSysDate = (): Date => {
     return new Date();
+  }
+
+  public getSubject = (): Subject<any> => {
+    return this.subject;
   }
 }
