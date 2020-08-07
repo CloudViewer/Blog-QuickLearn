@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NzDrawerService, NzModalService, NzMenuItemDirective } from 'ng-zorro-antd';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { NzModalService, NzDrawerService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../learncomm/utils.service';
 import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
 import { EventManager } from '@angular/platform-browser';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 @Component({
@@ -18,9 +19,12 @@ export class IndexComponent implements OnInit {
   private timeMsg: string = '上午好';
   private themeColor: string = '#1890ff'
   private menuData: any[];                // 菜单数据
-  private style: string = '0 0 220px';    // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
+  private style: string = '0 0 200px';    // 左侧菜单栏布局 0 0 220px; 默认宽度220px 不增长 不缩小
   private isCollapsed: boolean = false;   // 控制菜单缩进,
-  private isFullscreen: boolean = false;  // 是否全屏  
+  private isFullscreen: boolean = false;  // 是否全屏
+  private isFlexd: boolean = true;
+  private bodyW: number = 0;
+  private contentVisible: boolean = false;
 
   private lock: any = {
     isLock: false,           // 是否锁定
@@ -33,19 +37,25 @@ export class IndexComponent implements OnInit {
 
 
   constructor(
-    private drawerService: NzDrawerService,
     private modalService: NzModalService,
     private router: Router,
     private utils: UtilsService,
     private quickTransfer: QuickTransferService,
     private eventManager: EventManager,
+    private drawerService: NzDrawerService
   ) { }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.bodyW = event.target.innerWidth;
+    this.contentVisible = this.bodyW  > 290 ? false : true;
+  }
 
 
   async ngOnInit() {
+    this.bodyW = document.body.clientWidth;
     this.drawInit();
     this.timeMsg = this.getTimeMsg();
-
   }
 
   /**
@@ -349,8 +359,17 @@ export class IndexComponent implements OnInit {
    */
   doMenuSetting() {
     this.isCollapsed = this.isCollapsed ? false : true;
-    this.style = this.isCollapsed ? '0 0 80px' : '0 0 220px'
+    this.style = this.isCollapsed ? '0 0 80px' : '0 0 200px'
   }
+
+  /**
+  * 监听浏览器大小改变
+  * 页面锁定
+  */
+  windowFun = window.addEventListener("resize", () => {
+    let full_status = document['fullscreen'] || document['webkitIsFullScreen'] || document['mozFullScreen'] || false;
+    !full_status ? this.isFullscreen = false : this.isFullscreen = true;
+  })
 
   /**
    * 全屏事件
@@ -422,22 +441,40 @@ export class IndexComponent implements OnInit {
 
 
 
+
+
+
   /**
    * 弹出个人信息框
    */
-  openUserInfo() {
+  openDrawer(type: string) {
     // TODO: 头部导航栏的信息实现(待处理)...
+    console.log(type)
 
-    // console.log('headClick()');
-    // const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
-    //   nzTitle: '用户信息',
-    //   nzWidth: '640px',
-    //   nzMaskClosable: false, // 点击蒙层是否允许关闭
-    //   nzContent: UserInfoComponent,
-    //   nzContentParams: {
-    //     val: 'obj'
-    //   }
-    // });
+    let drawerRef = null;
+
+    if (type == 'my-center') {
+      drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
+        nzTitle: '个人中心',
+        nzWidth: '640px',
+        nzMaskClosable: false, // 点击蒙层是否允许关闭
+        nzContent: UserInfoComponent,
+        nzPlacement: 'right',
+        nzContentParams: {
+          val: ''
+        }
+      });
+    } else {
+      // drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
+      //   nzTitle: '个人设置',
+      //   nzWidth: '640px',
+      //   nzMaskClosable: false, // 点击蒙层是否允许关闭
+      //   nzContent: UserInfoComponent,
+      //   nzContentParams: {
+      //     val: ''
+      //   }
+      // });
+    }
 
     // // 关闭回调
     // drawerRef.afterClose.subscribe(data => {

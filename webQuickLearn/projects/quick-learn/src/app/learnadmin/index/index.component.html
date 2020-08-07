@@ -1,6 +1,6 @@
 
 <!-- lock-mask 备注：ZORRO tooltip文字提示问题待优化-->
-<div *ngIf="lock.isLock" class="quick-mask" >
+<div *ngIf="lock.isLock" class="quick-mask">
   <div class="flex-column mx-start sx-stretch" style="width: 100%;height: 100%;">
     <div class="flex-txt-center" style="flex:0 1 680px;">
     <div class="flex-column mx-start sx-center lock-show"  [ngClass]="{'lock-close': lock.isClose}">
@@ -28,93 +28,93 @@
           </ng-template>
         </div>
     </div>
-  </div>
+   </div>
   </div>
 </div>
 
-<div class="flex-column mx-start sx-stretch" style="height: 100%;">
-  <!-- 头部导航 -->
-  <div class="flex-row mx-start sx-center quick-head">
 
-      <!-- quick-logo -->
-      <div class="flex-txt-center" [ngStyle]="{'flex': style}" style="height:45px;">
-        <div [ngStyle]="{'background-image': isCollapsed ? 'url(/assets/imgs/logo.svg)' : 'url(/assets/imgs/logo-full.svg)',
-        'width':isCollapsed ? '30px':'100px','height':isCollapsed ? '30px' : '40px'}"
-         style="background-size: 100% 100%;background-repeat: no-repeat;"></div>
-      </div>
+<div class="flex-column mx-start sx-stretch" style="height: 100%;overflow: hidden;">
+    <!-- head -->
+    <div class="flex-row mx-start sx-center quick-head">
+        <div *ngIf="bodyW > 280 || (isCollapsed && bodyW > 280)" class="flex-txt-center" [ngStyle]="{'flex': bodyW < 770 ? '0 0 80px' : isCollapsed ? '0 0 80px':'0 0 200px'}" style="height:45px;">
+          <div [ngStyle]="{'background-image':bodyW < 770 ? 'url(/assets/imgs/logo.svg)' : isCollapsed ? 'url(/assets/imgs/logo.svg)'  : 'url(/assets/imgs/logo-full.svg)',
+              'width': bodyW < 770 ? '30px' : isCollapsed ? '30px':'100px','height': bodyw < 770 ? '30px' : isCollapsed ? '30px' : '40px'}"
+              style="background-size: 100% 100%;background-repeat: no-repeat;">
+          </div>
+        </div>
 
-      <!-- quick-head-icon -->
-      <div class="flex-row mx-start sx-center" style="flex: 1 1 auto;height: 45px;">
-        <a class="flex-txt-center quick-head-icon"  (click)="doMenuSetting()"><i nz-icon  nzType="{{isCollapsed ? 'menu-unfold' : 'menu-fold'}}" nzTheme="outline"></i></a>
-        <a class="flex-txt-center quick-head-icon" (click)="doLock()"><i nz-icon nzType="{{lock.isLock ? 'lock' : 'unlock'}}" nzTheme="outline"></i></a>
-        <a class="flex-txt-center quick-head-icon" (click)="doFullscreen()"><i nz-icon nzType="{{isFullscreen ? 'fullscreen-exit' : 'fullscreen'}}" nzTheme="outline"></i></a>
-        <a class="flex-txt-center" [ngStyle]="{'flex': isCollapsed ? '0 1 74.0891%' : '0 1 72%'}"></a>
-        <a class="flex-txt-center quick-head-icon"><nz-badge nzDot><i style="font-size:18px;" nz-icon nzType="bell"></i></nz-badge></a>
-        <a class="flex-txt-center quick-head-icon" href="//github.com/CloudViewer/Blog-QuickLearn"><i nz-icon nzType="github" nzTheme="outline"></i></a>
-          
+
+        <div class="flex-row mx-start sx-center" style="flex:0 0 150px;height:45px;">
+          <a class="flex-txt-center quick-head-icon"  (click)="doMenuSetting()"><i nz-icon  nzType="{{isCollapsed ? 'menu-unfold' : 'menu-fold'}}" nzTheme="outline"></i></a>
+          <a class="flex-txt-center quick-head-icon" (click)="doLock()"><i nz-icon nzType="{{lock.isLock ? 'lock' : 'unlock'}}" nzTheme="outline"></i></a>
+          <a class="flex-txt-center quick-head-icon" (click)="doFullscreen()"><i nz-icon nzType="{{isFullscreen ? 'fullscreen-exit' : 'fullscreen'}}" nzTheme="outline"></i></a>
+        </div>
         
-        <a class="flex-txt-center quick-head-icon"><i nz-icon nzType="qq" nzTheme="outline"></i></a>
-        <a class="flex-txt-center quick-head-icon"><i nz-icon nzType="transaction" nzTheme="outline"></i></a>
-        <a class="flex-txt-center quick-head-icon" style="flex:0 1 110px;">
-          <img width="25px" height="25px" style="border-radius: 50%;" src="/assets/imgs/users/user-h-img.jpg" alt="头像">
-          <i style=" font-size: 14px;font-weight:350;text-transform: capitalize;font-style: normal; margin-left: 5px;">Admin</i>
-        </a>
-      </div>
-  </div>
+        <div style="flex:1 1 auto;height:45px;"></div>
+        <div *ngIf="bodyW > 190" class="flex-row mx-end sx-center" style="flex:0 1 320px;height:45px;">
+          <a class="flex-txt-center quick-head-icon"><nz-badge nzDot><i style="font-size:18px;" nz-icon nzType="bell"></i></nz-badge></a>
+          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon"><i nz-icon nzType="tag" nzTheme="outline"></i></a>
+          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon"><i nz-icon nzType="transaction" nzTheme="outline"></i></a>
+          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon" href="//github.com/CloudViewer/Blog-QuickLearn"><i nz-icon nzType="github" nzTheme="outline"></i></a>
+          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon" nz-dropdown nzTrigger="click" [nzDropdownMenu]="user" nzPlacement="topLeft" style="flex:0 0 110px;">
+            <img width="25px" height="25px" style="border-radius: 50%;" src="/assets/imgs/users/user-h-img.jpg" alt="头像">
+            <i style=" font-size: 14px;font-weight:350;text-transform: capitalize;font-style: normal; margin-left: 5px;">Admin</i>
+            <nz-dropdown-menu #user="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item (click)="openDrawer('my-center')"><i nz-icon nzType="user" nzTheme="outline"></i><span>个人中心</span></li>
+                <li nz-menu-item (click)="openDrawer('my-setting')"><i nz-icon nzType="setting" nzTheme="outline"></i><span>个人设置</span></li>
+                <li nz-menu-item (click)="exit()"><i nz-icon nzType="poweroff" nzTheme="outline"></i><span>退出登录</span></li>
+              </ul>
+            </nz-dropdown-menu>
+          </a>
+        </div>
+    </div>
 
-
-  <!-- content -->
-  <div class="flex-row mx-start sx-stretch" style="flex:1 1 auto;z-index: 5px;background-color: #F5F7FA;">
+    
+    <div class="flex-row mx-start sx-stretch" style="flex:1 1 auto;z-index: 5px;background-color: #F5F7FA;">
       <!-- menu -->
       <div class="flex-column mx-start sx-stretch quick-menu-tree" [ngStyle]="{'flex': style}">
-        <div class="flex-column mx-center sx-center" [ngStyle]="{'flex': isCollapsed ? '0 0 50px' : '0 0 100px'}" style="background-color: #fff;">
-            <div class="flex-txt-center" [ngStyle]="{'flex': isCollapsed ? '0 0 30px' : '0 0 50px','width':isCollapsed ? '30px' : '50px','margin-top':'5px'}">
+        <div class="flex-column mx-center sx-center" [ngStyle]="{'flex': isCollapsed ? '0 1 50px' : '0 1 100px'}" style="background-color: #fff;">
+            <div class="flex-txt-center" [ngStyle]="{'flex': isCollapsed ? '0 0 30px' : '0 0 50px','width': isCollapsed ? '30px' : '50px','margin-top':'5px'}">
               <img [ngStyle]="{'width': isCollapsed ? '30px' : '50px','height':isCollapsed ? '30px' : '50px'}" style="border-radius: 50%;" src="/assets/imgs/users/user-h-img.jpg" alt="头像">
             </div>
             <div *ngIf="!isCollapsed" class="quick-time-msg">{{timeMsg + '，admin！'}}</div>
         </div>
-
         <ul style="flex:1 1 auto;border: none;" nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed" [nzTheme]="'light'">
-          <!-- ng-container 在界面上是没有任何意义的，在浏览器的审查元素中，无法看到它，container意思就是容器。只装东西，不会显示 -->
+          <!-- ng-container 不会在页面生成元素 从而利用这个元素递归生成无限极菜单 -->
           <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuData }"></ng-container>
           <ng-template #menuTpl let-menuData>
             <ng-container *ngFor="let item of menuData">
+              <!-- 因为官方组件原因 递归生成的子菜单项不能直接用icon 与 title 所以需要单独定义 -->
               <li *ngIf="item.children.length <= 0" nz-menu-item nzMatchRouter  (click)="itemMenuClick(item)"  [nzPaddingLeft]="item.lev * 24">
                   <i nz-icon [nzType]="item.icon.type"></i>
                   <span>{{item.title }}</span>
                   <a [routerLink]="'/' + item.routerLink"></a>
               </li>
-          
               <li *ngIf="item.children.length > 0" nz-submenu [nzOpen]="item.open" [nzPaddingLeft]="item.lev * 24" [ngStyle]="{'color': item.color}" [nzTitle]="item.title" [nzIcon]="item.icon.type">
                   <ul>
                     <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: item.children }"></ng-container>
                   </ul>
               </li>
-            
             </ng-container>
           </ng-template>
-        </ul> 
+        </ul>
       </div>
 
      
       <div class="flex-column mx-start sx-stretch" style="flex: 1 1 auto;">
-
-         <!-- quick-content -->
-        <div class="flex-column mx-start sx-stretch" style="flex: 1 1 auto;border: 1px solid red;">
-          <router-outlet style="display: none;"></router-outlet>
-        </div>
-
-
-        <!-- quick-footer -->
-        <div class="flex-column mx-center sx-stretch" style="flex: 0 0 55px;background-color: #fff;">
-          <div class="flex-row mx-center sx-center wrap" style="flex:0 0 auto;">
-            <div style="flex:0 1 auto;margin:0px 5px;font-size: 14px;">
-              纸上得来终觉浅，绝知此事要躬行
-              <i style="margin: 0px 5px;" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i>
+          <!-- content -->
+          <div class="flex-column mx-start sx-stretch" style="flex: 1 1 auto;">
+            <router-outlet style="display: none;"></router-outlet>
+          </div>
+          <!-- footer -->
+          <div class="flex-column mx-center sx-stretch" style="flex: 0 0 55px;background-color: #fff;">
+            <div class="flex-row mx-center sx-center wrap" style="flex:0 0 auto;">
+              <div style="flex:0 1 auto;margin:0px 5px;font-size: 14px;">
+                <span>纸上得来终觉浅，绝知此事要躬行</span><i style="margin: 0px 5px;" nz-icon [nzType]="'smile'" [nzTheme]="'twotone'"></i>
+              </div>
             </div>
           </div>
-        </div>
-
       </div>
 
   </div>
