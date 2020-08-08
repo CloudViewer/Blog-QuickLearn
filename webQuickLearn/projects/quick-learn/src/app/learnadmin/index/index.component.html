@@ -54,7 +54,13 @@
         <div *ngIf="bodyW > 190" class="flex-row mx-end sx-center" style="flex:0 1 320px;height:45px;">
           <a class="flex-txt-center quick-head-icon"><nz-badge nzDot><i style="font-size:18px;" nz-icon nzType="bell"></i></nz-badge></a>
           <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon"><i nz-icon nzType="tag" nzTheme="outline"></i></a>
-          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon"><i nz-icon nzType="transaction" nzTheme="outline"></i></a>
+          <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon" 
+            nz-popover nzPopoverTitle="觉得还不错的话支持一下吧！" 
+            [nzPopoverContent]="donateTemplate" 
+            nzPopoverTrigger="click">
+            <i nz-icon nzType="transaction" nzTheme="outline"></i>
+            <ng-template #donateTemplate><div class="quick-donate-code"></div></ng-template>
+          </a>
           <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon" href="//github.com/CloudViewer/Blog-QuickLearn"><i nz-icon nzType="github" nzTheme="outline"></i></a>
           <a *ngIf="bodyW > 770" class="flex-txt-center quick-head-icon" nz-dropdown nzTrigger="click" [nzDropdownMenu]="user" nzPlacement="topLeft" style="flex:0 0 110px;">
             <img width="25px" height="25px" style="border-radius: 50%;" src="/assets/imgs/users/user-h-img.jpg" alt="头像">

@@ -1,1 +1,69 @@
-<p>user-info works!</p>
+<div class="flex-column mx-start sx-stretch" style="height: 900px;">
+    <div class="flex-txt-top-center" style="flex: 0 0 100px;">
+        <div style="width: 100px;height: 100px;border-radius: 50%;
+            background-image: url(/assets/imgs/users/user-h-img.jpg);
+            background-size: 100% 100%;background-repeat: no-repeat;">
+        </div>
+    </div>
+    <div  class="flex-txt-top-center" style="flex: 0 0 auto;font-size: 20px;margin:5px 0px;color:#878787;">
+        Admin
+    </div>
+    <div class="flex-txt-top-center" style="flex: 0 0 auto;font-size: 16px;color: #878787;margin-bottom: 25px;">
+        海纳百川，有容乃大
+    </div>
+    <div class="flex-row mx-start sx-center quick-user-info">
+        <div style="flex:0 0 auto;" style="margin: 0px 10px;"><i nz-icon nzType="mail" nzTheme="twotone"></i></div>
+        <div style="flex:0 0 auto;">qingchenorg@163.com</div>
+    </div>
+
+    <div class="flex-row mx-start sx-center quick-user-info">
+        <div style="flex:0 0 auto;" style="margin: 0px 10px;"><i nz-icon nzType="cloud" nzTheme="twotone"></i></div>
+        <div style="flex:0 0 auto;">https://github.com/CloudViewer</div>
+    </div>
+
+    <div class="flex-row mx-start sx-center quick-user-info">
+        <div style="flex:0 0 auto;" style="margin: 0px 10px;"><i nz-icon nzType="environment" nzTheme="twotone"></i></div>
+        <div style="flex:0 0 auto;">广东 广州</div>
+    </div>
+
+    <div class="flex-row mx-start sx-center quick-user-info">
+        <div style="flex:0 0 auto;" style="margin: 0px 10px;"><i nz-icon nzType="home" nzTheme="twotone"></i></div>
+        <div style="flex:0 0 auto;">炫幻星科技</div>
+    </div>
+
+    <div class="flex-row mx-start sx-center quick-user-info">
+        <div style="flex:0 0 auto;" style="margin: 0px 10px;"> <i nz-icon nzType="mobile" nzTheme="twotone"></i></div>
+        <div style="flex:0 0 auto;">哎 不知道吧，就不告诉你 ···</div>
+    </div>
+
+    <div style="flex: 0 0 auto; border:1px dashed #F0F0F0;margin:30px 10px 10px 10px;"></div>
+
+
+    <div style="flex: 1 0 auto;margin:5px 15px;">
+        <h4 style="margin-left:5px;">标签</h4>
+        <nz-tag style="margin: 5px;"
+            *ngFor="let tag of tags; let i = index"
+            [nzMode]="i === 0 ? 'default' : 'closeable'"
+            (nzOnClose)="handleClose(tag)"
+            >
+            {{ sliceTagName(tag) }}
+        </nz-tag>
+
+        <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
+            <i nz-icon nzType="plus"></i> 添加
+          </nz-tag>
+          <input
+            #inputElement
+            nz-input
+            nzSize="small"
+            *ngIf="inputVisible"
+            type="text"
+            [(ngModel)]="inputValue"
+            style="width: 78px;margin: 5px;"
+            (blur)="handleInputConfirm()"
+            (keydown.enter)="handleInputConfirm()"
+          />
+    </div>
+
+
+</div>
