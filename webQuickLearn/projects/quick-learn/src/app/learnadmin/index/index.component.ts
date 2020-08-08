@@ -428,7 +428,7 @@ export class IndexComponent implements OnInit {
    * 头部导航解锁
    */
   unLock() {
-    if (this.lock.password == "123456") {
+    if (this.lock.password == "admin") {
       this.lock.isClose = true;
       clearTimeout(this.lock.lockScale_TIO);
       this.lock.lockScale_TIO = setTimeout(() => {
@@ -456,7 +456,7 @@ export class IndexComponent implements OnInit {
     if (type == 'my-center') {
       drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
         nzTitle: '个人中心',
-        nzWidth: '640px',
+        nzWidth: '550px',
         nzMaskClosable: false, // 点击蒙层是否允许关闭
         nzContent: UserInfoComponent,
         nzPlacement: 'right',
