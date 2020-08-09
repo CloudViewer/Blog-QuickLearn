@@ -1,4 +1,91 @@
-<div class="flex-column mx-start sx-stretch" style="width: 100;height: 100%;">
+<div class="flex-column mx-start sx-stretch quick-login">
+    <div class="flex-column mx-center sx-stretch" style="flex: 0 1 800px;">
+        <div class="flex-txt-top-center" style="flex:0 1 420px;">
+            <div class="flex-column mx-start sx-stretch" style="width: 400px;height: 420px;margin: 5px;border-radius: 8px;background-color: #fff;">
+                <div class="flex-txt-center" style="flex:0 0 120px;margin: 5px;">
+                    <div style="width: 100px;height: 100px;background-image: url(/assets/imgs/quick_login_logo.png);background-size: 100% 100%;background-repeat: no-repeat;"></div>
+                </div>
+                <div class="flex-txt-center" style="flex:0 0 40px;margin:0px 5px;">欢迎使用 Quick-Learn 博客管理系统</div>
+                
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" style="margin: 5px 30px;">
+
+                    <nz-form-item style="margin-bottom:15px;">
+                      <nz-form-control nzErrorTip=" 名字错啦">
+                        <nz-input-group nzPrefixIcon="user">
+                          <input formControlName="userName" nz-input placeholder="请输入用户名" />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
 
 
+                    <nz-form-item style="margin-bottom:15px;">
+                      <nz-form-control nzErrorTip=" 密码也错啦">
+                        <nz-input-group nzPrefixIcon="lock">
+                          <input formControlName="password" nz-input type="password" placeholder="请输入密码" />
+                        </nz-input-group>
+                      </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item style="margin-bottom:15px;">
+                        <nz-form-control nzErrorTip="验证码错了">
+                            <div class="flex-row mx-start sx-start">
+                                 <div style="flex: 1 1 auto;"> 
+                                    <nz-input-group nzPrefixIcon="safety">
+                                        <input formControlName="password" nz-input type="password" placeholder="请输入验证码" />
+                                      </nz-input-group>
+                                </div>
+                                 <div style="flex: 0 0 120px;margin-left: 5px;">
+                                   <a><img  style="width: 120px;" src="" alt="验证码"></a> 
+                                </div>
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item style="margin-bottom:0px;">
+                      <nz-form-control >
+                        <button nz-button nzBlock nzType="primary">登 录</button>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </form>
+                
+                <!-- <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please input your username!">
+                        <nz-input-group [nzSuffix]="userSuffixTemplate">
+                          <input type="text" nz-input formControlName="userName" placeholder="UserName" />
+                        </nz-input-group>
+                        <ng-template #userSuffixTemplate><i nz-icon nzType="user"></i></ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group [nzSuffix]="lockSuffixTemplate">
+                          <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                        <ng-template #lockSuffixTemplate><i nz-icon nzType="lock"></i></ng-template>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control>
+                        <label nz-checkbox formControlName="remember">
+                          <span>Remember me</span>
+                        </label>
+                        <a class="login-form-forgot" class="login-form-forgot">Forgot password</a>
+                        <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+                        Or
+                        <a>register now!</a>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </form> -->
+
+
+                <!-- <div class="flex-txt-center"  style="flex:0 0 40px;border:1px solid red;margin: 5px;">1</div>
+                <div class="flex-txt-center" style="flex:0 0 40px;border:1px solid red;margin: 5px;">1</div>
+                <div style="flex:0 0 40px;border:1px solid red;margin: 5px;">1</div>
+                <div class="flex-txt-center" style="flex:0 0 40px;border:1px solid red;margin: 5px;">1</div> -->
+
+            </div>
+
+        </div>
+
+    </div>
 </div>

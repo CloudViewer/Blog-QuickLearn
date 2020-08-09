@@ -54,6 +54,7 @@ export class IndexComponent implements OnInit {
 
   async ngOnInit() {
     this.bodyW = document.body.clientWidth;
+    this.quickTransfer.setComponentTitle('主页 - QLearn');
     this.drawInit();
     this.timeMsg = this.getTimeMsg();
   }
