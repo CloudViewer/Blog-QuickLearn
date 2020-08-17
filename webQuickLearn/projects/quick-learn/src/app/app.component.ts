@@ -7,12 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'quick-learn';
   isLogin: boolean = false;
 
   showLoading: boolean = true;
 
   connectModel: string = 'http';
+  showLoading_TIO: any;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -22,20 +22,19 @@ export class AppComponent {
      *    1、后端是否启动 启动则判断是否登录
      *    2、后端没有启动的情况下应从
      */
-
-    if (!this.isLogin) {
-
-      this.router.navigateByUrl('/login');
+    
+    if (this.isLogin) {
+      clearTimeout(this.showLoading_TIO)
       this.showLoading = true;
       this.connectModel = 'websocket';
-      setTimeout(() => {
+      this.showLoading_TIO = setTimeout(() => {
         this.showLoading = false;
       }, 2000);
 
     } else {
       this.showLoading = true;
       this.connectModel = 'http';
-      // this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
       // this.router.navigateByUrl('/learnadmin');
     }
   }
