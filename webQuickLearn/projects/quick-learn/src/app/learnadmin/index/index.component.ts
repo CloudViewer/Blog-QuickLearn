@@ -5,6 +5,7 @@ import { UtilsService } from '../../learncomm/utils.service';
 import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
 import { EventManager } from '@angular/platform-browser';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { UserSettingComponent } from './user-setting/user-setting.component';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class IndexComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.bodyW = event.target.innerWidth;
-    this.contentVisible = this.bodyW  > 290 ? false : true;
+    this.contentVisible = this.bodyW > 290 ? false : true;
   }
 
 
@@ -64,6 +65,7 @@ export class IndexComponent implements OnInit {
    */
   drawInit() {
     const nowLink = this.router.url.slice(1, this.router.url.length);
+    // TODO: 后端请求返回结果 菜单列表
     const menus = [
       {
         title: '主页',
@@ -426,7 +428,7 @@ export class IndexComponent implements OnInit {
   }
 
   /**
-   * 头部导航解锁
+   * 页面解锁
    */
   unLock() {
     if (this.lock.password == "admin") {
@@ -450,10 +452,7 @@ export class IndexComponent implements OnInit {
    */
   openDrawer(type: string) {
     // TODO: 头部导航栏的信息实现(待处理)...
-    console.log(type)
-
     let drawerRef = null;
-
     if (type == 'my-center') {
       drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
         nzTitle: '个人中心',
@@ -466,20 +465,22 @@ export class IndexComponent implements OnInit {
         }
       });
     } else {
-      // drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
-      //   nzTitle: '个人设置',
-      //   nzWidth: '640px',
-      //   nzMaskClosable: false, // 点击蒙层是否允许关闭
-      //   nzContent: UserInfoComponent,
-      //   nzContentParams: {
-      //     val: ''
-      //   }
-      // });
+      drawerRef = this.drawerService.create<UserSettingComponent, { val: any }, any>({
+        nzTitle: '个人设置',
+        nzWidth: '540px',
+        nzMaskClosable: false, // 点击蒙层是否允许关闭
+        nzContent: UserSettingComponent,
+        nzContentParams: {
+          val: ''
+        }
+      });
     }
 
-    // // 关闭回调
-    // drawerRef.afterClose.subscribe(data => {
-    //   console.log(data)
-    // });
+    // 关闭回调
+    if (drawerRef && drawerRef != null) {
+      drawerRef.afterClose.subscribe(data => {
+        console.log('close --> drawer');
+      });
+    }
   }
 }
