@@ -7,9 +7,10 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import { UserInfoComponent } from './index/user-info/user-info.component';
+import { UserSettingComponent } from './index/user-setting/user-setting.component';
 
 @NgModule({
-  declarations: [IndexComponent,UserInfoComponent],
+  declarations: [IndexComponent,UserInfoComponent, UserSettingComponent],
   imports: [
     CommonModule,
     LearnadminRoutingModule,
@@ -20,7 +21,8 @@ import { UserInfoComponent } from './index/user-info/user-info.component';
   ],
   exports: [],
   entryComponents:[
-    UserInfoComponent
+    UserInfoComponent,
+    UserSettingComponent
   ],
 })
 export class LearnadminModule { }
