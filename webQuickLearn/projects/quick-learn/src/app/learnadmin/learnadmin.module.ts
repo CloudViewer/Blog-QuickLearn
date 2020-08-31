@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NzToolTipModule} from 'ng-zorro-antd/tooltip';
 import { UserInfoComponent } from './index/user-info/user-info.component';
 import { UserSettingComponent } from './index/user-setting/user-setting.component';
+import { LearncommModule } from '../learncomm/learncomm.module';
 
 @NgModule({
   declarations: [IndexComponent,UserInfoComponent, UserSettingComponent],
@@ -17,7 +18,8 @@ import { UserSettingComponent } from './index/user-setting/user-setting.componen
     NgZorroAntdModule,
     FormsModule,
     NzInputModule,
-    NzToolTipModule
+    NzToolTipModule,
+    LearncommModule
   ],
   exports: [],
   entryComponents:[

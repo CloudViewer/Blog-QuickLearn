@@ -8,7 +8,9 @@ import { Subject } from 'rxjs';
 })
 export class UtilsService {
 
-  private subject = new Subject<any>()
+  private subject = new Subject<any>();
+
+  private unCachedData: any = {};
 
   constructor(
     private router: Router,
@@ -88,4 +90,8 @@ export class UtilsService {
   public getSubject = (): Subject<any> => {
     return this.subject;
   }
+  
+
+  
+
 }
