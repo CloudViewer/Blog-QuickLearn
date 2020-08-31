@@ -1,7 +1,18 @@
 <div class="flex-quick" style="border: steelblue 1px solid;">
     <div style="flex:0 0 auto;border:1px solid red;">1</div>
+    <button nz-button nz-popover [nzPopoverTitle]="titleTemplate"  [nzPopoverContent]="contentTemplate" nzPopoverTrigger="hover">
+      Hover me
+    </button>
+    <ng-template #titleTemplate>
+        <i nz-icon nzType="border" nzTheme="outline"></i>
+        <span style="margin-left:5px;">icon</span>
+      </ng-template>
+    <ng-template #contentTemplate>
+
+      <comm-icon></comm-icon>
+    </ng-template>
 </div>
-<div style="background: #ECECEC; padding: 30px;">
+<!-- <div style="background: #ECECEC; padding: 30px;">
     <nz-row [nzGutter]="16">
       <nz-col [nzSpan]="12">
         <nz-card>
@@ -56,4 +67,4 @@
           </nz-card>
         </nz-col>
     </nz-row>
-  </div>
+  </div> -->
