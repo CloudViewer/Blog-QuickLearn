@@ -483,4 +483,8 @@ export class IndexComponent implements OnInit {
       });
     }
   }
+
+  exit(){
+    console.log('exit()');
+  }
 }
