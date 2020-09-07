@@ -1,7 +1,61 @@
-<div class="flex-quick">
-    <div style="flex:0 0 80px;background-color: #fff;margin-bottom: 10px;border-radius: 4px;">{{pageSizeOptions}}</div>
+<div class="flex-quick" style="background-color: #fff;">
+    <div class="flex-row mx-start sx-center wrap" style="flex: 0 0 60px;margin: 10px 20px 0px 20px;">
+        <div class="flex-row mx-start sx-center wrap" style="flex: 0 0 160px;margin-right: 30px;">
+            <div style="flex: 0 0 auto;margin-right: 10px;">类型</div>
+            <nz-select style="flex: 1 0 auto;" [(ngModel)]="selectedValue" nzPlaceHolder="请选择类型"  nzDropdownMatchSelectWidth>
+                <nz-option nzValue="0" nzLabel="所有用户"></nz-option>
+                <nz-option nzValue="1" nzLabel="冻结用户"></nz-option>
+                <nz-option nzValue="2" nzLabel="预留"></nz-option>
+            </nz-select>
+        </div>
+        <div class="flex-row mx-start sx-center wrap" style="flex: 0 0 260px;margin-right: 10px;">
+            
+            <div style="flex: 0 0 auto;margin-right: 10px;">用户名</div>
+            <div style="flex: 1 0 auto;">
+                <input  nz-input placeholder="请输入用户名称" nzSize="default" />
+            </div>
+        </div>
+        <div style="flex: 0 0 auto;">
+            <button nz-button nzType="default"><i nz-icon nzType="search"></i>查询</button>
+        </div>
+        <div style="flex: 0 0 auto;border: 1px solid yellow;">1</div>
+        <div style="flex: 0 0 auto;border: 1px solid yellow;">1</div>
+    
+    
+    </div>
+     <nz-table style="margin: 5px 20px;"
+            nzSize="middle" 
+            nzBordered
+            [nzData]="listOfData"
+            [nzLoading]="'false'"
+            nzShowSizeChanger
+            [nzPageSizeOptions]="pageSizeOptions"  #basicTable >
+            <thead>
+                <tr>
+                    <th nzShowCheckbox nzWidth="80px"></th>
+                    <th [nzAlign]="'left'" nzWidth="100px">名称</th>
+                    <th [nzAlign]="'center'">年龄</th>
+                    <th [nzAlign]="'left'">地址</th>
+                    <th [nzAlign]="'center'" nzWidth="200px">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td nzShowCheckbox></td>
+                    <td [nzAlign]="'left'">{{ data.name }}</td>
+                    <td [nzAlign]="'center'">{{ data.age }}</td>
+                    <td [nzAlign]="'left'">{{ data.address }}</td>
+                    <td [nzAlign]="'center'">
+                        <button nz-button nzSize="small" style="margin:0px 5px;" nzType="default">修改</button>
+                        <button nz-button nzSize="small" style="margin:0px 5px;" nzType="danger">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <!-- <div style="flex: 0 0 auto;border: 1px solid red;">22</div> -->
+    <!-- <div style="flex:0 0 80px;background-color: #fff;margin-bottom: 10px;border-radius: 4px;">{{pageSizeOptions}}</div>
     <div style="flex:1 1 auto;background-color: #fff;border-radius: 4px;">
-        <nz-table 
+        <nz-table style="margin: 10px 5px;"
             nzSize="middle" 
             [nzData]="listOfData"
             [nzLoading]="'false'"
@@ -30,5 +84,5 @@
                 </tr>
             </tbody>
         </nz-table>
-    </div>
+    </div> -->
 </div>

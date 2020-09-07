@@ -6,6 +6,7 @@ import { NzIconModule, NgZorroAntdModule, NzLayoutModule, NzAvatarModule } from 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { LearncommModule } from '../../learncomm/learncomm.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { LearncommModule } from '../../learncomm/learncomm.module';
     FormsModule,
     NzAvatarModule,
     LearncommModule,
+    HttpClientModule,
     ReactiveFormsModule,
   ]
 })
