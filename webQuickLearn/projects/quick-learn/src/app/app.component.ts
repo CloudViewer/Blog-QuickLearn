@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
+import { Router } from '@angular/router';
+import { QuickTransferService, Error, ErrorLevel } from 'projects/quick-transfer/src/public-api';
+import { NzMessageService } from 'ng-zorro-antd';
 
 
 @Component({
@@ -16,38 +17,36 @@ export class AppComponent {
   connectModel: string = 'http';
   showLoading_TIO: any;
 
-  constructor(private route: ActivatedRoute, private router: Router,private qts:QuickTransferService) { }
+  constructor(private message: NzMessageService, private router: Router, private quickTran: QuickTransferService) { }
 
-  ngOnInit():void {
-    /**
-     *  TODO: 初始化逻辑处理
-     *    1、后端是否启动 启动则判断是否登录
-     *    2、后端没有启动的情况下应从
-     */
-    // console.log('hello')
-    // this.qts.onConnected(() =>{
-    //   this.connectModel = 'webSocket';
-    // })
-    // .onClosed(() => {
-    //   this.connectModel = 'Http';
-    // });
+  ngOnInit(): void {
 
-    
-    
-    // if (this.isLogin) {
-    //   clearTimeout(this.showLoading_TIO)
-    //   this.showLoading = true;
-    //   this.connectModel = 'websocket';
-    //   this.showLoading_TIO = setTimeout(() => {
-    //     this.showLoading = false;
-    //   }, 2000);
-
-    // } else {
-    //   this.showLoading = true;
-    //   this.connectModel = 'http';
-    //   // this.router.navigateByUrl('/login');
-    //   this.router.navigateByUrl('/learnadmin');
-    // }
-    
+    this.quickTran
+      .onConnected(() => {
+        this.connectModel = 'websocket';
+      })
+      .onClosed(() => {
+        this.connectModel = 'http';
+      })
+      .onError((error: Error) => {
+        switch (error.errorLevel) {
+          case ErrorLevel.SESSION_TIMEOUT:
+            this.message.create('error', "会话超时，请重新登录！");
+            break;
+          default:
+            this.message.create('error', error.friendlyMessage);
+            break;
+        }
+      })
+      .onLoading(() => {
+        this.showLoading = true;
+      })
+      .onLoaddone(() => {
+        this.showLoading = false;
+      })
+      .init({
+        websocketUrl: 'ws://127.0.0.1:8080/ws',
+        httpUrl: 'http://127.0.0.1:8080/bs'
+      });
   }
 }

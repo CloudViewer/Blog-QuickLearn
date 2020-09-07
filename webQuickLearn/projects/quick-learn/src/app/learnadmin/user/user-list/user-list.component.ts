@@ -13,6 +13,8 @@ export class UserListComponent implements OnInit {
     return 'flex-quick';
   }
 
+  selectedValue = '0';
+
   pageSizeOptions:number[] = [5,10,20,30,50];
 
   listOfData = [

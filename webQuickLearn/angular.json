@@ -35,9 +35,7 @@
             "styles": [
               "projects/quick-learn/src/styles.less"
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -163,6 +161,130 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        }
+      }
+    },
+    "quick-blog": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "root": "projects/quick-blog",
+      "sourceRoot": "projects/quick-blog/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/quick-blog",
+            "index": "projects/quick-blog/src/index.html",
+            "main": "projects/quick-blog/src/main.ts",
+            "polyfills": "projects/quick-blog/src/polyfills.ts",
+            "tsConfig": "projects/quick-blog/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/quick-blog/src/favicon.ico",
+              "projects/quick-blog/src/assets"
+            ],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/quick-blog/src/styles.less"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/quick-blog/src/environments/environment.ts",
+                  "with": "projects/quick-blog/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "quick-blog:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "quick-blog:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "quick-blog:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/quick-blog/src/test.ts",
+            "polyfills": "projects/quick-blog/src/polyfills.ts",
+            "tsConfig": "projects/quick-blog/tsconfig.spec.json",
+            "karmaConfig": "projects/quick-blog/karma.conf.js",
+            "assets": [
+              "projects/quick-blog/src/favicon.ico",
+              "projects/quick-blog/src/assets"
+            ],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/quick-blog/src/styles.less"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/quick-blog/tsconfig.app.json",
+              "projects/quick-blog/tsconfig.spec.json",
+              "projects/quick-blog/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/quick-blog/e2e/protractor.conf.js",
+            "devServerTarget": "quick-blog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "quick-blog:serve:production"
+            }
           }
         }
       }
