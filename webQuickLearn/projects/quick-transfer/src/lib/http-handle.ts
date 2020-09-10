@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Error } from './error';
 import { MessageHandle } from './message-handle';
 import { Response } from './response';
@@ -13,10 +13,32 @@ export class HttpHandle {
     private tioLoaddone: any;
 
 
+
+
     constructor(httpConnector: HttpClient, httpUrl: string) {
         this.httpConnector = httpConnector;
         this.httpUrl = httpUrl;
     }
+
+
+    private getHttpOptions() {
+        const jwt = localStorage.getItem('QL-TOKEN');
+        console.log(`token获取：${jwt}`)
+        if (jwt) {
+            const httpOptions = {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Authorization': `Bearer${jwt}`
+                })
+            }
+            return httpOptions;
+        } else {
+            return null;
+        }
+    }
+
+
+
 
     /**
      * 发生错误要执行的方法
@@ -62,13 +84,12 @@ export class HttpHandle {
     }
 
     public send(action: string, data: {}): MessageHandle {
-        console.log(this.httpUrl)
         let messageHandle = new MessageHandle(++this.msgIdStep);
         setTimeout(() => {
             // 在发送前显示加载动画
             this.timeoutLoading(messageHandle && messageHandle.beforeSend ? messageHandle.beforeSend() : null);
 
-            this.httpConnector.post<Response>(this.httpUrl.concat(action), { id: messageHandle.getMessageHandleId, data: data }, { withCredentials: true }).subscribe(
+            this.httpConnector.post<Response>(this.httpUrl.concat(action), { id: messageHandle.getMessageHandleId, data: data }, { headers: this.getHttpOptions().headers, withCredentials: true }).subscribe(
                 (result: Response) => {
                     // 取消动画加载
                     this.timeoutLoaddone(messageHandle && messageHandle.beforeReceived ? messageHandle.beforeReceived() : null);
