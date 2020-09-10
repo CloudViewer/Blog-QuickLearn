@@ -10,17 +10,15 @@ import { NzMessageService } from 'ng-zorro-antd';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  isLogin: boolean = false;
-
-  showLoading: boolean = true;
-
+  showLoading: boolean;
   connectModel: string = 'http';
-  showLoading_TIO: any;
 
   constructor(private message: NzMessageService, private router: Router, private quickTran: QuickTransferService) { }
 
   ngOnInit(): void {
-
+    // TODO：目前只是对token的测试，后续调整
+    console.log('token设置')
+    localStorage.setItem("QL-TOKEN", 'hello-shdjs');
     this.quickTran
       .onConnected(() => {
         this.connectModel = 'websocket';
@@ -46,7 +44,7 @@ export class AppComponent {
       })
       .init({
         websocketUrl: 'ws://127.0.0.1:8080/ws',
-        httpUrl: 'http://127.0.0.1:8080/bs'
+        httpUrl: 'http://127.0.0.1:8096/bs'
       });
   }
 }
