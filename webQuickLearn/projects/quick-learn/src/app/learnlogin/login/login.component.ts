@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   loginbtnLoading: boolean = false;
   login_TIO: any;
+  key: any;
 
   constructor(private quickTran: QuickTransferService, private fb: FormBuilder, private utils: UtilsService, private message: NzMessageService) { }
 
@@ -28,8 +29,11 @@ export class LoginComponent implements OnInit {
     this.getImgVerify();
   }
 
-  getImgVerify() {	//验证码加载
-    this.quickTran.send('/valicode', {})
+  /**
+   * 获取验证码
+   */
+  getImgVerify() {
+    this.quickTran.send('/verifycode', {})
       .onBeforeSend(() => {
         return { isSysLoading: false };
       })
@@ -37,7 +41,9 @@ export class LoginComponent implements OnInit {
         return { isSysLoaddone: false };
       })
       .onReceived((data: any) => {
-        this.imgVerify = data.vCode;
+        this.key = data.key;
+        this.imgVerify = data.verifyCode;
+        localStorage.setItem("QL-TOKEN", data.token);
       })
       .onError((error: Error) => {
         this.message.create('error', error.detailMessage);
@@ -57,14 +63,28 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.validateForm.valid) {
-      // TODO:登录请求
-      this.loginbtnLoading = true;
-      clearTimeout(this.login_TIO);
-      this.login_TIO = setTimeout(() => {
-        this.utils.redirect('/learnadmin');
-      }, 2000);
-
-
+      // TODO:登录请求   this.utils.redirect('/learnadmin');
+      this.quickTran.send('/login', {
+        key: this.key,
+        userName: this.validateForm.get('userName').value,
+        password: this.validateForm.get('password').value,
+        verifyCode: this.validateForm.get('verify').value
+      })
+        .onBeforeSend(() => {
+          this.loginbtnLoading = true;
+          return { isSysLoading: false };
+        })
+        .onBeforeReceived(() => {
+          this.loginbtnLoading = false;
+          return { isSysLoaddone: false };
+        })
+        .onReceived((data: any) => {
+          console.log(data)
+        })
+        .onError((error: Error) => {
+          this.message.create('error', error.detailMessage);
+          return { isSysError: false };
+        }, [ErrorLevel.USER])
     }
 
   }
