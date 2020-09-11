@@ -1,8 +1,8 @@
 # Blog-QuickLearn
-基于SpringBoot + Angular8 + NG-ZORRO的前后端分离博客系统（后端暂未开发..）
+基于SpringBoot2 + Angular8 + NG-ZORRO的前后端分离博客系统
 
 ### Quick-Learn目录结构图
-![](./assets/imgs/1596360232656.png)
+![](.\assets\imgs\1599808625593.png)
 
 ------
 
@@ -14,12 +14,16 @@
 |     npm     | v6.14.6  |
 | Angular Cli | v8.3.26  |
 | Typescript  |  v3.5.3  |
+|     JDK     |   1.8    |
+| SpringBoot  |  2.1.16  |
+|    Mysql    |  8.0.17  |
+|    Redis    | 3.2.100  |
 
 ------
 
 ### 基本环境搭建
 
-1. 基于 vscode 开发工具
+1. 前端基于 vscode 开发工具
 
    下载地址：https://code.visualstudio.com/
 
@@ -37,4 +41,6 @@
 
    文档地址：https://ng.ant.design/version/8.5.x/docs/introduce/zh
    
-6. 不定期更新...
+6. 后端基于IDEA开发
+
+7. 不定期更新...
