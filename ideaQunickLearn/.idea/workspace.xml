@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7dc10748-af93-40b8-b8b4-0ef8dba0a27a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../webQuickLearn/projects/quick-learn/src/app/learnlogin/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../webQuickLearn/projects/quick-learn/src/app/learnlogin/login/login.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="7dc10748-af93-40b8-b8b4-0ef8dba0a27a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599718212383</updated>
       <workItem from="1599718217950" duration="3812000" />
-      <workItem from="1599796683110" duration="2944000" />
+      <workItem from="1599796683110" duration="3589000" />
     </task>
     <task id="LOCAL-00001" summary="后端环境搭建（测试版本），后续架构调整。">
       <created>1599719351332</created>
