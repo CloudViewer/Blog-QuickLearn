@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   imgVerify: string = '';
   validateForm: FormGroup;
   loginbtnLoading: boolean = false;
-  login_TIO: any;
+  imgVerify_TIO: any;
   key: any;
 
   constructor(private quickTran: QuickTransferService, private fb: FormBuilder, private utils: UtilsService, private message: NzMessageService) { }
@@ -79,10 +79,17 @@ export class LoginComponent implements OnInit {
           return { isSysLoaddone: false };
         })
         .onReceived((data: any) => {
-          console.log(data)
+          if (data.success) {
+            // clearTimeout(this.imgVerify_TIO);
+            this.utils.redirect('/learnadmin');
+          }
         })
         .onError((error: Error) => {
           this.message.create('error', error.detailMessage);
+          // TODO:优化用户体验，当验证码过期后重新获取验证码，后端错误信息返回待调整
+          // this.imgVerify_TIO = setTimeout(() => {
+          //   this.imgVerifyClick();
+          // }, 50);
           return { isSysError: false };
         }, [ErrorLevel.USER])
     }
