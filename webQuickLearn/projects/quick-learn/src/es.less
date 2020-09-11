@@ -1,7 +1,6 @@
 * {
   margin     : 0px;
   padding    : 0px;
-  font-size  : 14px;
   font-family: '微软雅黑';
 }
 
@@ -11,9 +10,13 @@
   flex-flow: column nowrap;
   justify-content:flex-start;
   align-items:stretch;
-  border-radius: 4px;
-  margin:10px;
-  overflow: auto;
+  max-height: 860px;
+  min-height: 200px;
+  margin: 10px;
+  overflow-y: scroll;
+}
+.flex-quick::-webkit-scrollbar{
+  display: none;
 }
 
 .ql-connectlip {
@@ -35,6 +38,8 @@
   .ql-connectlip;
   background-color: #03A9F4;
 }
+
+
 
 .flex-row {
   display  : flex;

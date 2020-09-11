@@ -1,2 +1,2 @@
-# QuickLearn
-快速学习博客系统
+# Quick-Learn
+ 前端结构文档

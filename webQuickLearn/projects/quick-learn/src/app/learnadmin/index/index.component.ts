@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NzDrawerService, NzModalService, NzMenuItemDirective, } from 'ng-zorro-antd';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { NzModalService, NzDrawerService } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { UtilsService } from '../../learncomm/utils.service';
+import { QuickTransferService } from 'projects/quick-transfer/src/public-api';
+import { EventManager } from '@angular/platform-browser';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UserSettingComponent } from './user-setting/user-setting.component';
 
 
 @Component({
@@ -13,24 +17,47 @@ import { UtilsService } from '../../learncomm/utils.service';
 export class IndexComponent implements OnInit {
 
 
+  private timeMsg: string = '上午好';
+  private themeColor: string = '#1890ff'
+  private menuData: any[];                // 菜单数据
+  private style: string = '0 0 200px';    // 左侧菜单栏布局 0 0 220px; 默认宽度220px 不增长 不缩小
+  private isCollapsed: boolean = false;   // 控制菜单缩进,
+  private isFullscreen: boolean = false;  // 是否全屏
+  private isFlexd: boolean = true;
+  private bodyW: number = 0;
+  private contentVisible: boolean = false;
 
-  themeColor: string = '#1890ff'
-  menuData: any[];              // 菜单数据
-  style: string = '0 0 240px';  // 左侧菜单栏布局 0 0 240px; 默认宽度200px 不增长 不缩小
-  isCollapsed: boolean = false; // 控制菜单缩进,
-
+  private lock: any = {
+    isLock: false,           // 是否锁定
+    passwordVisible: false,  // 控制Lock状态下的输入框图标
+    password: '',            // Lock状态下的输入框值
+    tooltipTitle: '',
+    isClose: false,
+    lockScale_TIO: null
+  }
 
 
   constructor(
-    private drawerService: NzDrawerService,
     private modalService: NzModalService,
     private router: Router,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private quickTransfer: QuickTransferService,
+    private eventManager: EventManager,
+    private drawerService: NzDrawerService
   ) { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.bodyW = event.target.innerWidth;
+    this.contentVisible = this.bodyW > 290 ? false : true;
+  }
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    this.bodyW = document.body.clientWidth;
+    this.quickTransfer.setComponentTitle('主页 - QLearn');
     this.drawInit();
+    this.timeMsg = this.getTimeMsg();
   }
 
   /**
@@ -38,6 +65,7 @@ export class IndexComponent implements OnInit {
    */
   drawInit() {
     const nowLink = this.router.url.slice(1, this.router.url.length);
+    // TODO: 后端请求返回结果 菜单列表
     const menus = [
       {
         title: '主页',
@@ -153,7 +181,7 @@ export class IndexComponent implements OnInit {
             lev: 2,
             routerLink: 'learnadmin/blog/list',
             children: [
-              
+
             ],
             open: false,
             selected: false,
@@ -183,6 +211,34 @@ export class IndexComponent implements OnInit {
     this.menuData = menus;
     // 通过fid 找到对应的父级菜单 初始化时对应菜单选中
     this.findByFidRS(menus, this.findByLink(this.findAllLinksRS(menus), nowLink).fid);
+  }
+
+  /**
+   * 菜单左侧时间提示信息
+   */
+  getTimeMsg(): string {
+    const hours = this.utils.getSysDate().getHours();
+    if (hours >= 0 && hours < 6) {
+      return '熬夜冠军';
+    }
+    if (hours >= 6 && hours < 9) {
+      return '早上好';
+    }
+
+    if (hours >= 9 && hours < 12) {
+      return '上午好';
+    }
+
+    if (hours >= 12 && hours < 14) {
+      return '睡个午觉吧';
+    }
+
+    if (hours >= 14 && hours < 18) {
+      return '下午好';
+    }
+    if (hours >= 18 && hours < 24) {
+      return '晚上好';
+    }
   }
 
   /**
@@ -250,7 +306,6 @@ export class IndexComponent implements OnInit {
   }
 
 
-  // 以下方法初始化时使用
   /**
    * 根据菜单id查找
    * @param menus 菜单数据
@@ -307,8 +362,86 @@ export class IndexComponent implements OnInit {
    */
   doMenuSetting() {
     this.isCollapsed = this.isCollapsed ? false : true;
-    this.style = this.isCollapsed ? '0 0 90px' : '0 0 240px'
+    this.style = this.isCollapsed ? '0 0 80px' : '0 0 200px'
   }
+
+  /**
+  * 监听浏览器大小改变
+  * 页面锁定
+  */
+  windowFun = window.addEventListener("resize", () => {
+    let full_status = document['fullscreen'] || document['webkitIsFullScreen'] || document['mozFullScreen'] || false;
+    !full_status ? this.isFullscreen = false : this.isFullscreen = true;
+  })
+
+  /**
+   * 全屏事件
+   */
+  doFullscreen() {
+    if (!this.isFullscreen) {
+      const docElmWithBrowsersFullScreenFunctions = document.documentElement as HTMLElement & {
+        mozRequestFullScreen(): Promise<void>;
+        webkitRequestFullscreen(): Promise<void>;
+        msRequestFullscreen(): Promise<void>;
+      };
+      if (docElmWithBrowsersFullScreenFunctions.requestFullscreen) {
+        docElmWithBrowsersFullScreenFunctions.requestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen) { // Firefox 
+        docElmWithBrowsersFullScreenFunctions.mozRequestFullScreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen) { // Chrome, Safari and Opera 
+        docElmWithBrowsersFullScreenFunctions.webkitRequestFullscreen();
+      } else if (docElmWithBrowsersFullScreenFunctions.msRequestFullscreen) { // IE/Edge 
+        docElmWithBrowsersFullScreenFunctions.msRequestFullscreen();
+      }
+      this.isFullscreen = true;
+    } else {
+      const docWithBrowsersExitFunctions = document as Document & {
+        mozCancelFullScreen(): Promise<void>;
+        webkitExitFullscreen(): Promise<void>;
+        msExitFullscreen(): Promise<void>;
+      };
+      if (docWithBrowsersExitFunctions.exitFullscreen) {
+        docWithBrowsersExitFunctions.exitFullscreen();
+      } else if (docWithBrowsersExitFunctions.mozCancelFullScreen) { // Firefox 
+        docWithBrowsersExitFunctions.mozCancelFullScreen();
+      } else if (docWithBrowsersExitFunctions.webkitExitFullscreen) { // Chrome, Safari and Opera 
+        docWithBrowsersExitFunctions.webkitExitFullscreen();
+      } else if (docWithBrowsersExitFunctions.msExitFullscreen) { // IE/Edge 
+        docWithBrowsersExitFunctions.msExitFullscreen();
+      }
+      this.isFullscreen = false;
+    }
+  }
+
+  /**
+   * 页面锁定
+   */
+  doLock() {
+    if (this.lock.isLock) {
+      this.lock.isLock = false
+    } else {
+      clearTimeout(this.lock.lockScale_TIO);
+      this.lock.isLock = true;
+      this.lock.isClose = false;
+      this.lock.tooltipTitle = '兄die，体验过回车的力量吗！';
+    }
+  }
+
+  /**
+   * 页面解锁
+   */
+  unLock() {
+    if (this.lock.password == "admin") {
+      this.lock.isClose = true;
+      clearTimeout(this.lock.lockScale_TIO);
+      this.lock.lockScale_TIO = setTimeout(() => {
+        this.lock.isLock = false;
+        this.lock.passwordVisible = false;
+        this.lock.password = '';
+      }, 200);
+    }
+  }
+
 
 
 
@@ -317,23 +450,41 @@ export class IndexComponent implements OnInit {
   /**
    * 弹出个人信息框
    */
-  openUserInfo() {
+  openDrawer(type: string) {
     // TODO: 头部导航栏的信息实现(待处理)...
+    let drawerRef = null;
+    if (type == 'my-center') {
+      drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
+        nzTitle: '个人中心',
+        nzWidth: '550px',
+        nzMaskClosable: false, // 点击蒙层是否允许关闭
+        nzContent: UserInfoComponent,
+        nzPlacement: 'right',
+        nzContentParams: {
+          val: ''
+        }
+      });
+    } else {
+      drawerRef = this.drawerService.create<UserSettingComponent, { val: any }, any>({
+        nzTitle: '个人设置',
+        nzWidth: '540px',
+        nzMaskClosable: false, // 点击蒙层是否允许关闭
+        nzContent: UserSettingComponent,
+        nzContentParams: {
+          val: ''
+        }
+      });
+    }
 
-    // console.log('headClick()');
-    // const drawerRef = this.drawerService.create<UserInfoComponent, { val: any }, any>({
-    //   nzTitle: '用户信息',
-    //   nzWidth: '640px',
-    //   nzMaskClosable: false, // 点击蒙层是否允许关闭
-    //   nzContent: UserInfoComponent,
-    //   nzContentParams: {
-    //     val: 'obj'
-    //   }
-    // });
+    // 关闭回调
+    if (drawerRef && drawerRef != null) {
+      drawerRef.afterClose.subscribe(data => {
+        console.log('close --> drawer');
+      });
+    }
+  }
 
-    // // 关闭回调
-    // drawerRef.afterClose.subscribe(data => {
-    //   console.log(data)
-    // });
+  exit(){
+    console.log('exit()');
   }
 }

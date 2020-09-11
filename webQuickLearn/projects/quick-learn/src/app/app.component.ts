@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { QuickTransferService, Error, ErrorLevel } from 'projects/quick-transfer/src/public-api';
+import { NzMessageService } from 'ng-zorro-antd';
+
 
 @Component({
   selector: 'quick-learn',
@@ -7,36 +10,41 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'quick-learn';
-  isLogin: boolean = false;
-
-  showLoading: boolean = true;
-
+  showLoading: boolean;
   connectModel: string = 'http';
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private message: NzMessageService, private router: Router, private quickTran: QuickTransferService) { }
 
-  ngOnInit() {
-    /**
-     *  TODO: 初始化逻辑处理
-     *    1、后端是否启动 启动则判断是否登录
-     *    2、后端没有启动的情况下应从
-     */
-
-    if (!this.isLogin) {
-
-      // this.router.navigateByUrl('/learnadmin/home');
-      this.showLoading = true;
-      this.connectModel = 'websocket';
-      setTimeout(() => {
+  ngOnInit(): void {
+    // TODO：目前只是对token的测试，后续调整
+    console.log('token设置')
+    localStorage.setItem("QL-TOKEN", 'hello-shdjs');
+    this.quickTran
+      .onConnected(() => {
+        this.connectModel = 'websocket';
+      })
+      .onClosed(() => {
+        this.connectModel = 'http';
+      })
+      .onError((error: Error) => {
+        switch (error.errorLevel) {
+          case ErrorLevel.SESSION_TIMEOUT:
+            this.message.create('error', "会话超时，请重新登录！");
+            break;
+          default:
+            this.message.create('error', error.friendlyMessage);
+            break;
+        }
+      })
+      .onLoading(() => {
+        this.showLoading = true;
+      })
+      .onLoaddone(() => {
         this.showLoading = false;
-      }, 2000);
-
-    } else {
-      this.showLoading = true;
-      this.connectModel = 'http';
-      // this.router.navigateByUrl('/login');
-      // this.router.navigateByUrl('/learnadmin');
-    }
+      })
+      .init({
+        websocketUrl: 'ws://127.0.0.1:8080/ws',
+        httpUrl: 'http://127.0.0.1:8096/bs'
+      });
   }
 }
