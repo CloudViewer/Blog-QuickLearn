@@ -2,7 +2,7 @@
 基于SpringBoot2 + Angular8 + NG-ZORRO的前后端分离博客系统
 
 ### Quick-Learn目录结构图
-![](.\assets\imgs\1599808625593.png)
+![](./assets/imgs/1599808625593.png)
 
 ------
 
