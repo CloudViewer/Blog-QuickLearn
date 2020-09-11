@@ -134,10 +134,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599718492731" />
-    <state x="413" y="133" key="CommitChangelistDialog2" timestamp="1599808755036">
+    <state x="413" y="133" key="CommitChangelistDialog2" timestamp="1599810544733">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="413" y="133" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1599808755036" />
+    <state x="413" y="133" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1599810544733" />
     <state width="1877" height="354" key="GridCell.Tab.0.bottom" timestamp="1599808728343">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -186,18 +186,26 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="354" key="GridCell.Tab.2.right/0.0.1920.1080@0.0.1920.1080" timestamp="1599808728344" />
+    <state x="184" y="96" key="MergeDialog" timestamp="1599810589929">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="184" y="96" key="MergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810589929" />
+    <state x="669" y="256" key="MultipleFileMergeDialog" timestamp="1599810589936">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="669" y="256" key="MultipleFileMergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810589936" />
     <state x="440" y="115" key="SettingsEditor" timestamp="1599722357537">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1599722357537" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599810537174">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599810602131">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599810537174" />
-    <state x="644" y="331" key="git4idea.merge.GitPullDialog" timestamp="1599810501135">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599810602131" />
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog" timestamp="1599810554118">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="644" y="331" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810501135" />
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810554118" />
     <state x="334" y="241" key="new project wizard" timestamp="1599718374626">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
