@@ -17,6 +17,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="dream" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IgnoredFileRootStore">
@@ -191,10 +196,18 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1599722357537" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599719379207">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599810353630">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599719379207" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599810353630" />
+    <state x="703" y="252" key="git4idea.branch.GitSmartOperationDialog" timestamp="1599810365158">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="703" y="252" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810365158" />
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog" timestamp="1599810386864">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810386864" />
     <state x="334" y="241" key="new project wizard" timestamp="1599718374626">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
