@@ -123,10 +123,22 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="后端环境搭建（测试版本），后续架构调整。" />
     <MESSAGE value="跨域调整" />
-    <option name="LAST_COMMIT_MESSAGE" value="跨域调整" />
+    <MESSAGE value="工作空间调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="工作空间调整" />
   </component>
   <component name="WindowStateProjectService">
     <state x="690" y="287" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599718492731">
@@ -189,10 +201,14 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="115" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1599722357537" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599719379207">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1599810537174">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599719379207" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1599810537174" />
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog" timestamp="1599810501135">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="644" y="331" key="git4idea.merge.GitPullDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1599810501135" />
     <state x="334" y="241" key="new project wizard" timestamp="1599718374626">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
