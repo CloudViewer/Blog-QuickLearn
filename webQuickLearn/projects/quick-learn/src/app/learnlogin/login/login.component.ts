@@ -78,8 +78,9 @@ export class LoginComponent implements OnInit {
           this.loginbtnLoading = false;
           return { isSysLoaddone: false };
         })
-        .onReceived((data: any) => {
-          if (data.success) {
+        .onReceived((res: any) => {
+          if (res.success) {
+            console.log(res.data)
             // clearTimeout(this.imgVerify_TIO);
             this.utils.redirect('/learnadmin');
           }
