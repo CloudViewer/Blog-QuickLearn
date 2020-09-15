@@ -1,9 +1,12 @@
 package com.learn.es.manage;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.learn.es.comm.response.ResponseData;
 import com.learn.es.comm.utils.ESCache;
 import com.learn.es.comm.utils.ESUtils;
+import com.learn.es.pojo.User;
+import com.learn.es.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,7 +22,12 @@ public class ESCommManage {
 
 
     @Resource
-    ESCache<Object> esCache;
+    private ESCache<Object> esCache;
+
+    @Resource
+    private UserService userService;
+
+
 
 
     /**
@@ -55,11 +63,10 @@ public class ESCommManage {
         if(param == null){
             return ResponseData.userError("参数错误");
         }
-
         JSONObject data = param.getJSONObject("data");
         String vKey = ESUtils.jsonGetString(data, "key");
 
-        // 检查Key
+        // 验证码检查
         boolean hasKey = esCache.hasKey(vKey);
         long outTime = esCache.getExpire(vKey);
         if(!hasKey || outTime < 0L){
@@ -71,9 +78,14 @@ public class ESCommManage {
             return ResponseData.userError("验证码错误~");
         }
 
-        String userName = ESUtils.jsonGetString(data, "userName");
-        String password = ESUtils.jsonGetString(data, "password");
-
-        return ResponseData.data().set("success", true);
+        // 用户名密码验证
+        User user = userService.getUser(ESUtils.jsonGetString(data, "userName"),
+                ESUtils.jsonGetString(data, "password"));
+        if(user == null){
+            return ResponseData.userError("用户名密码错误，请重新输入...");
+        }
+        System.out.println(JSON.toJSON(user));
+        // TODO:用户信息加入缓存中，方便后续使用
+        return ResponseData.data().set("success", true).set("data", user);
     }
 }
