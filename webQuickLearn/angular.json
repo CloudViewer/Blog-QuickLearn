@@ -290,5 +290,8 @@
       }
     }
   },
-  "defaultProject": "quick-learn"
+  "defaultProject": "quick-learn",
+  "cli": {
+    "analytics": false
+  }
 }
